@@ -48,33 +48,9 @@ BIRD-INTERACT supports two evaluation modes as mentioned above:
 
 We are releasing a lite version of BIRD-INTERACT, `bird-interact-lite-exp`, which includes 270 high-quality real-world tasks specifically for PostgreSQL. This is a good starting point for quick experimentation. 
 
-### 🦜 Open Version
+### 🦜 Full Version
 
-The open version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benchmark that includes 600 tasks for PostgreSQL. It covers a wide range of SQL operations and user queries. The full version is coming soon.
-
-<!-- 
-### Model Performance on BIRD-INTERACT Lite
-
-| Rank | Model Name | Reward | Level |
-|------|------------|-------|-----------|
-| 1 | o3-mini-2025-01-31  | **34.50** | 🏆 Leading |
-| 2 | deepseek-reasoner (r1) | 33.67 | 🌟 Elite |
-| 3 | o1-preview-2024-09-12 | 33.33 | 🌟 Elite |
-| 4 | claude-3-7-sonnet-20250219(thinking) | 30.67 | 🌟 Elite |
-| 5 |gemini-2.0-flash-thinking-exp-01-21 | 30.17 | 🌟 Elite|
-| 6 | grok-3-beta | 29.83 | 💎 Superior |
-
-> Complete results of Open version can be found [here](https://huggingface.co/datasets/birdsql/bird-critic-1.0-open).
-> Bird-CRITIC 1.0 Flash result can be found [here](https://huggingface.co/datasets/birdsql/bird-critic-1.0-flash-exp/) -->
-
-<!-- ## 🦅 Full Sets of BIRD-CRITIC 1.0
-
-The BIRD-CRITIC 1.0 benchmark is available in the following configurations:
-
-1.  `bird-critic-1.0-flash-exp`: A lite version consisting of 200 instances on PostgreSQL.
-2.  `bird-critic-1.0-open`: The full version containing 600 instances across MySQL, PostgreSQL, SQL Server, and Oracle.
-3.  `bird-critic-1.0-postgresql`: A 600-instance version specifically for PostgreSQL.
-4.  `bird-critic-1.0-bigquery`: A lite version containing between 100 and 200 instances for BigQuery. -->
+The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benchmark that includes 600 tasks for PostgreSQL. It covers a wide range of SQL operations and user queries. The full version is coming soon.
 
 ## 📦 Dataset Details
 
@@ -115,16 +91,16 @@ from datasets import load_dataset
 dataset = load_dataset("birdsql/bird-interact-lite")
 print(dataset["lite"][0])
 
-# Load the open version of the dataset (coming soon)
+# Load the full version of the dataset (coming soon)
 dataset = load_dataset("birdsql/bird-interact-full")
 print(dataset["full"][0])
 ```
 
-Or you can use the provided script to download the open version of the dataset and split it into different dialects.
+Or you can use the provided script to download the full version of the dataset and split it into different dialects.
 ```bash
 cd baseline/data
 python pull_data.py \
-  --schema_path path/to/open_schema.jsonl \
+  --schema_path path/to/full_schema.jsonl \
   --input_path path/to/input.jsonl \ # Path to the input JSONL file (may be empty if you want to download the dataset from HuggingFace)
   --output_folder path/to/output_dir # output folder of the split files
 ```
