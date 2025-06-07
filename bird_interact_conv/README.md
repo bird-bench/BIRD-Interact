@@ -1,4 +1,4 @@
-# Bird-Interact Conversation Module
+# Bird-Interact Conversational Module
 
 This module implements the conversation-based interaction system for the BIRD-Interact project, focusing on natural language interactions with database systems.
 
