@@ -38,7 +38,7 @@ A test that sees how well an evaluated system (S) can communicate with a user si
 
 For a batch of tasks we count how many times *S* succeeds in each case:
 
-| Situation | What counts as a win? | Score added per win |
+| Situation | What counts as a win? | Reward added per win |
 |-----------|----------------------|----------------------|
 | Clarification, first try | Solved without using the debugging | **0.7** |
 | Clarification, after debugging | Solved on the second try | **0.5** |
