@@ -192,7 +192,6 @@ If you want the log file for each instance, you can set the `--logging` to `true
 - [x] Release conversational version, bird-interact-conv.
 - [x] Release agent version, bird-interact-agent.
 - [ ] Release Full bird-interact-full (600).
-- [ ] Update agent baselines.
 - [ ] SFT / RL an User Simulator
 
 ## Created By:
