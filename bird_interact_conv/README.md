@@ -30,7 +30,7 @@ A test that sees how well an evaluated system (S) can communicate with a user si
 4. **Turn limit**  
    The back-and-forth in the clarification round is limited by two things:  
    • how many ambiguity points were marked in the task, plus  
-   • a small extra “patience” allowance.
+   • a small extra “user patience” allowance (default is 3).
 
 ---
 
