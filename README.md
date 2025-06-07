@@ -52,6 +52,15 @@ We are releasing a lite version of BIRD-INTERACT, `bird-interact-lite-exp`, whic
 
 The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benchmark that includes 600 tasks for PostgreSQL. It covers a wide range of SQL operations and user queries. The full version is coming soon.
 
+### Interaction-Time Scaling (ITS)
+
+Interaction-Time Scaling (ITS) refers to a model’s ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model’s idealized single-turn performance on a fully specified, unambiguous task, we say it satisfies the **ITS law**. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue. Currently, we only find claude-3-7-sonnet satisfies the ITS law.
+
+<p align="center">
+  <img src="materials/interaction_scaling_law.png" 
+       style="width: 100%; min-width: 100px; display: block; margin: auto; ">
+</p>
+
 ## 📦 Dataset Details
 
 ### Dataset Description
