@@ -4,7 +4,7 @@ This module implements the conversation-based interaction system for the BIRD-In
 
 ## Overview
 <p align="center">
-  <img src="../materials/workflow.png" 
+  <img src="../materials/c-interact.png" 
        style="width: 100%; min-width: 100px; display: block; margin: auto; ">
 </p>
 
@@ -30,7 +30,7 @@ A test that sees how well an evaluated system (S) can communicate with a user si
 4. **Turn limit**  
    The back-and-forth in the clarification round is limited by two things:  
    • how many ambiguity points were marked in the task, plus  
-   • a small extra “user patience” allowance (default is 3).
+   • a small extra “user patience” (i.e., extra turns) allowance with the default being 3.
 
 ---
 
