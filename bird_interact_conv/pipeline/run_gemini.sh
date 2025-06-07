@@ -189,8 +189,7 @@ wait
 
 ## Eval
 jsonl_file="${project_root}/results/patience_${patience}/${system_model_name}/sql_results.jsonl"
-python ${project_root}/eval/eval_bird_interact_batch.py --jsonl "$jsonl_file"
-wait
+# Go to the BIRD-Interact/evaluation/run/run_eval.sh and run it with jsonl_file above.
 
 # ===========================================: Phase 1 Debugging: One More Chance for Debugging ===========================================
 ### Parameters Setting
@@ -222,8 +221,8 @@ wait
 
 ## Eval
 jsonl_file="${project_root}/results/patience_${patience}/${system_model_name}/sql_results_debug.jsonl"
-python ${project_root}/eval/eval_bird_interact_batch.py --jsonl_file "$jsonl_file"
-wait
+# Go to the BIRD-Interact/evaluation/run/run_eval.sh and run it with jsonl_file above.
+
 
 # ===========================================: Phase 2 (Follow Up Question) :===========================================
 # Phase 2: Follow Up question
@@ -258,8 +257,8 @@ wait
 
 ## Eval
 jsonl_file="${project_root}/results/patience_${patience}/${system_model_name}/sql_results_fu.jsonl"
-python ${project_root}/eval/eval_bird_interact_batch.py --jsonl_file "$jsonl_file"
-wait
+# Go to the BIRD-Interact/evaluation/run/run_eval.sh and run it with jsonl_file above.
+
 
 # ===========================================: Phase 2 Debugging: One more chance for Follow Up question Debugging ===========================================
 ### Parameters Setting
@@ -292,5 +291,4 @@ wait
 
 ## Eval
 jsonl_file="${project_root}/results/patience_${patience}/${system_model_name}/sql_results_fu_debug.jsonl"
-python ${project_root}/eval/eval_bird_interact_batch.py --jsonl_file "$jsonl_file"
-wait
+# Go to the BIRD-Interact/evaluation/run/run_eval.sh and run it with jsonl_file above.
