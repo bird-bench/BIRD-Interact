@@ -88,11 +88,13 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 1. Download the database dumps:
    - Get from: [Google Drive](https://drive.google.com/file/d/1KABce6czIqL9kMyIX7i-_A0CIQoDnmyW/view)
-   - Move to working directory and rename to `postgre_table_dumps`
+   - Move to working directory of `evaluation` and rename to `postgre_table_dumps`
 
 2. Build and run Docker containers:
    ```bash
+   cd ../evaluation
    docker compose up --build
+   docker compose exec so_eval_env bash
    ```
    This launches two containers:
    - PostgreSQL database
@@ -101,26 +103,12 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 ### 3. API Configuration
 
 #### VertexAI Setup
-
-> Current user simulator is based on gemini-2.0-flash-001, which is called by VertexAI. If you are new customer to google cloud, you will get [$300 in free credits](https://cloud.google.com/vertex-ai?hl=en), and could use it to call vertex API.
-
-If you want to use VertexAI, you should configure in `src/llm_utils/call_api_batch.py` and `src/llm_utils/vertex_ai_simple.py`:
-```python
-GCP_PROJECT = "Your GCP Project ID"
-GCP_REGION = "us-central1"
-GCP_CREDENTIALS_PATH = "Your GCP Credentials Path"
-```
-> If you find it hard to configure this, you could also try other API providers to use gemini-2.0-flash-001, or use other models.
-
-#### OpenAI/Third-party API Setup
-Configure in `src/llm_utils/config.py`:
-- Set `base_url`
-- Set `api_key`
+You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key in the `code/config.py` file
 
 ## Running Experiments
 
    ```bash
-   # Run the conversation pipeline
+   # Run the conversation pipeline, need to set the API key in code/config.py
    cd pipeline
    bash run_gemini.sh
    ```
