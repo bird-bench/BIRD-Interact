@@ -1,6 +1,43 @@
 # Bird-Interact Agentic Evaluation 
 
-A repository for running and evaluating BIRD-Interact Agent.
+This part is for running and evaluating BIRD-Interact Agent.
+
+## Agentic Evaluation Setting
+Here we introduce the agentic evaluation mode ($\alpha$-Interact) of BIRD-Interact.
+
+### Task Setting
+A task consists of two phases: an **ambiguous user query** (phase-1) followed by a **follow-up query** (phase-2). All these queries require the understanding of external knowledge. To complete these queries, agents could interact with two environments: a **Database Environment** and a **User Simulator Environment**. Each interaction is constrained by a **budget** measured in virtual *bird-coin*s <img src="materials/bird-coin.png" style="height: 1em; vertical-align: middle;">, with different actions incurring varying *bird-coin*s <img src="materials/bird-coin.png" style="height: 1em; vertical-align: middle;">. Only after phase-1 is completed, user will deliver the follow-up query. The rewards for phase-1 and phase-2 are 0.7 and 0.3 respectively. 
+
+> **Why set budget?**: Agent has the risk of unlimited exploration behaviors (e.g. ReAct Agent may fall into infinite loop). This setting also helps explore Interaction-time scaling (budget ↑) and stress testing (budget ↓) behavious of Agent. Additinoally, it could test the agent's planning and decision making ability.
+
+
+<p align="center">
+  <img src="materials/a-mode.png" 
+       style="width: 40%; min-width: 100px; display: block; margin: auto; ">
+</p>
+
+
+
+### Environments and Action Space
+Different from most studies only containing a working environment, our environment includes a **Database Env** and a **User Simulator Env**.
+- [Database Env](src/envs/bird_interact_env/sql_env.py): A PostgreSQL database with a set of tables.
+- [User Simulator Env](src/envs/user_simulator/us_env_bird_interact.py): A user simulator that can clarify ambiguities and test the submitted SQL from the Agent.
+
+Our current agent baseline's action space and *bird-coin*s <img src="materials/bird-coin.png" style="height: 1em; vertical-align: middle;"> are designed as follows:
+<!-- figure  materials/actions.png-->
+![actions](materials/actions.png)
+
+Heuristically, we set higher cost for those actions interacting with users, i.e. `ask` and `submit`.
+
+### Budget Calculation
+We set the budget case by case. 
+- **Starting Grants**: First, we assign a "starting grants", i.e. **6** *bird-coin*s, for each task. 
+- **Ambiguity Resolution Budget**: Then, for the task with many ambiguities, it may require more budget to finish the task. Thus, we assign **2** *bird-coin*s for each ambiguity of the user query. 
+- **User Patience Budget**: Also, we introduce a adjustable *bird-coin*s to indicate the user patience, including four levels, **0**, **6**, **10**, **14** *bird-coin*s.
+
+The total budget = starting grants + ambiguity resolution budget + user patience budget. You could find the budget calculation in batch-running implemented in [batch_run_bird_interact/main.py](batch_run_bird_interact/main.py#L110).
+
+
 
 ## Repository Structure
 
@@ -19,6 +56,11 @@ A repository for running and evaluating BIRD-Interact Agent.
 ├── run_batch_experiments.sh   # Batch experiment runner
 └── run_experiment.sh          # Single experiment runner
 ```
+
+
+
+
+
 
 ## Quick Start
 
@@ -65,6 +107,14 @@ Configure in `src/llm_utils/config.py`:
 
 ## Running Experiments
 
+### Start the Docker containers
+
+```bash
+docker compose exec so_eval_env bash
+```
+
+
+
 ### Single Sample Mode
 Single sample mode (`src/` and `experiments/`) is useful for debugging and workflow understanding
 ```bash
@@ -79,4 +129,6 @@ bash run_batch_experiments.sh
 ```
 Output directory: `outputs/batch_runs/`
 Default user patience is set to 6.
+
+
 
