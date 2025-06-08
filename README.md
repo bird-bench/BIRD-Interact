@@ -52,6 +52,31 @@ We are releasing a lite version of BIRD-INTERACT, `bird-interact-lite-exp`, whic
 
 The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benchmark that includes 600 tasks for PostgreSQL. It covers a wide range of SQL operations and user queries. The full version is coming soon.
 
+### Model Performance Results on BIRD-INTERACT Lite
+
+#### 1. **c-Interact** Performance
+| Rank | Model Name         | Normalized Reward | Level        |
+|------|--------------------|-------|--------------|
+| 1    | o3-mini            | 33.04 | 🏆 Excellent Chat |
+| 2    | GPT-4o             | 30.33 | 💎 Good Chat      |
+| 3    | Gemini-2.0-flash   | 27.41 | 💎 Good Chat      |
+| 4    | Claude-3.7-sonnet  | 26.60 | ✨ Standard       |
+| 5    | DeepSeek-R1        | 21.74 | ✨ Standard       |
+| 6    | Qwen3              | 20.33 | ⚪ Basic          |
+| 7    | DeepSeek-V3        | 15.85 | ⚪ Basic          |
+
+#### 2. **a-Interact** Performance
+| Rank | Model Name         | Normalized Reward | Level              |
+|------|--------------------|-------|---------------------|
+| 1    | Claude-3.7-sonnet  | 29.19 | 🏆 Excellent Interaction |
+| 2    | o3-mini            | 21.07 | 💎 Good Interaction      |
+| 3    | DeepSeek-V3        | 19.19 | 💎 Good Interaction      |
+| 4    | Qwen3              | 18.74 | ✨ Standard              |
+| 5    | GPT-4o             | 18.37 | ✨ Standard              |
+| 6    | Gemini-2.0-flash   | 17.26 | ⚪ Basic                 |
+| 7    | DeepSeek-R1        | 17.07 | ⚪ Basic                 |
+
+
 ### Interaction-Time Scaling (ITS)
 
 Interaction-Time Scaling (ITS) refers to a model’s ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model’s idealized single-turn performance on a fully specified, unambiguous task, we say it satisfies the **ITS law**. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue. Currently, we only find claude-3-7-sonnet satisfies the ITS law.
@@ -88,7 +113,7 @@ Interaction-Time Scaling (ITS) refers to a model’s ability to continuously inc
 ### Dataset Uses
 
 To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases along with data.
-please email [bird.bench23@gmail.com](mailto:bird.bench23@gmail.com) or [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` in title for full set, which will be sent automatically.
+please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` in title for full set, which will be sent automatically.
 
 
 ### Use the Dataset from HuggingFace
