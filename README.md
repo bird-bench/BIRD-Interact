@@ -88,7 +88,7 @@ Interaction-Time Scaling (ITS) refers to a model’s ability to continuously inc
 ### Dataset Uses
 
 To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases along with data.
-please email [bird.bench23@gmail.com](mailto:bird.bench23@gmail.com) or [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) for full set, which will be sent automatically.
+please email [bird.bench23@gmail.com](mailto:bird.bench23@gmail.com) or [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` in title for full set, which will be sent automatically.
 
 
 ### Use the Dataset from HuggingFace
