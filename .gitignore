@@ -1,2 +1,5 @@
 .DS_Store
 __pycache__/
+bird_interact_agent/outputs/
+bird_interact_agent/postgre_table_dumps/
+bird_interact_agent/data/
