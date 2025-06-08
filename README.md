@@ -119,6 +119,7 @@ please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the ta
 ### Use the Dataset from HuggingFace
 
 ```bash
+cd bird_interact_conv # OR bird_interact_agent
 cd data
 git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 # Combine with GT fields (contact us for access) into bird_interact_data.jsonl
