@@ -36,3 +36,5 @@ tqdm==4.67.1
 typing_extensions==4.12.2
 uritemplate==4.1.1
 datasets==3.2.0
+sqlglot==26.16.4
+sqlglotrs==0.4.0
