@@ -67,7 +67,7 @@ The total budget = starting grants + ambiguity resolution budget + user patience
 ### 1. Data Preparation
 
 ```bash
-cd data
+mkdir data && cd data
 git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 # Combine with GT fields (contact us for access) into bird_interact_data.jsonl
 ```
@@ -76,10 +76,11 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 1. Download the database dumps:
    - Get from: [Google Drive](https://drive.google.com/file/d/1KABce6czIqL9kMyIX7i-_A0CIQoDnmyW/view)
-   - Move to working directory and rename to `postgre_table_dumps`
+   - Move to current working directory `bird_interact_agent` and rename to `postgre_table_dumps`
 
 2. Build and run Docker containers:
    ```bash
+   cd bird_interact_agent
    docker compose up --build
    ```
    This launches two containers:
@@ -95,7 +96,7 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 If you want to use VertexAI, you should configure in `src/llm_utils/call_api_batch.py` and `src/llm_utils/vertex_ai_simple.py`:
 ```python
 GCP_PROJECT = "Your GCP Project ID"
-GCP_REGION = "us-central1"
+GCP_REGION = "Your GCP Region"
 GCP_CREDENTIALS_PATH = "Your GCP Credentials Path"
 ```
 > If you find it hard to configure this, you could also try other API providers to use gemini-2.0-flash-001, or use other models.
@@ -110,6 +111,7 @@ Configure in `src/llm_utils/config.py`:
 ### Start the Docker containers
 
 ```bash
+cd bird_interact_agent
 docker compose exec so_eval_env bash
 ```
 
