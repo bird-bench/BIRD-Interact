@@ -189,7 +189,7 @@ def inference():
 
     args = parser.parse_args()  
         
-    from bird_interact.prompts.prompts import system_react
+    from bird_interact_conv.prompts.prompts import system_react
     prompt_template = system_react
 
     load_from_jsonl_dataset(prompt_path=args.prompt_path, user_resp_path=args.user_resp_path, result_path=args.result_path, DB_schema_path=args.DB_schema_path, external_kg_path=args.external_kg_path, prompt_template=prompt_template, patience=args.patience, turn_i=args.turn_num, phase=args.phase)

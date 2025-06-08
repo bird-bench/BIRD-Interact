@@ -104,7 +104,7 @@ def inference():
     
     args = parser.parse_args()  
         
-    from bird_interact.prompts.prompts import user_simulator_encoder
+    from bird_interact_conv.prompts.prompts import user_simulator_encoder
     prompt_template = user_simulator_encoder
 
     load_from_jsonl_dataset(prompt_path=args.prompt_path, sys_resp_path=args.sys_resp_path, result_path=args.result_path, DB_schema_path=args.DB_schema_path, prompt_template=prompt_template, turn_i=args.turn_num)
