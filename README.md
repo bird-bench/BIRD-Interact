@@ -118,7 +118,12 @@ please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the ta
 
 ### Use the Dataset from HuggingFace
 
-You can download the dataset from HuggingFace using the following command:
+```bash
+cd data
+git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
+# Combine with GT fields (contact us for access) into bird_interact_data.jsonl
+```
+<!-- You can download the dataset from HuggingFace using the following command:
 ```bash
 from datasets import load_dataset
 # Load the flash version of the dataset
@@ -137,7 +142,7 @@ python pull_data.py \
   --schema_path path/to/full_schema.jsonl \
   --input_path path/to/input.jsonl \ # Path to the input JSONL file (may be empty if you want to download the dataset from HuggingFace)
   --output_folder path/to/output_dir # output folder of the split files
-```
+``` -->
 
 ## 💨 Quick Eval
 
