@@ -88,7 +88,7 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 1. Download the database dumps:
    - Get from: [Google Drive](https://drive.google.com/file/d/1KABce6czIqL9kMyIX7i-_A0CIQoDnmyW/view)
-   - Move to working directory of `evaluation` and rename to `postgre_table_dumps`
+   - Move to working directory of `../evaluation` and rename to `postgre_table_dumps`
 
 2. Build and run Docker containers:
    ```bash
@@ -102,7 +102,6 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 ### 3. API Configuration
 
-#### VertexAI Setup
 You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key in the `code/config.py` file
 
 ## Running Experiments
