@@ -116,15 +116,9 @@ To avoid data leakage by auto-crawling, we do not include GT solution sqls and t
 please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` in title for full set, which will be sent automatically.
 
 
-### Use the Dataset from HuggingFace
+<!-- ### Use the Dataset from HuggingFace
 
-```bash
-cd bird_interact_conv # OR bird_interact_agent
-cd data
-git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
-# Combine with GT fields (contact us for access) into bird_interact_data.jsonl
-```
-<!-- You can download the dataset from HuggingFace using the following command:
+You can download the dataset from HuggingFace using the following command:
 ```bash
 from datasets import load_dataset
 # Load the flash version of the dataset
