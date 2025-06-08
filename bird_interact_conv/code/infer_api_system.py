@@ -115,13 +115,13 @@ def wrap_up_prompt(data, DB_schema_path, external_kg_path, prompt_template, pati
                 if terminate_flag == True:
                     data["Terminate_flg"] = True
                 user_response = extract_user_response(response_user_prev)
-                prompt = prompt + sys_response + "\n- User: " + user_response + '\n\n### Turn [[turn_i]] ([[turn_left]] turns left): \n# Format: "<s>[YOUR-ONLY-ONE-QUESTION]]</s>" if you choose to ask for clarification; or "<t>```sql [YOUR-SQL] ```</t>" if you choose to generate final SQL.\n- You: '.replace('[[turn_i]]', str(turn_i)).replace('[[turn_left]]', str(max_turn-turn_i+1))
+                prompt = prompt + sys_response + "\n- User: " + user_response + '\n\n### Turn [[turn_i]] ([[turn_left]] turns left): \n# Format: "<s>[YOUR-ONLY-ONE-QUESTION]]</s>" if you choose to ask for clarification; or "<t>```postgresql [YOUR-SQL] ```</t>" if you choose to generate final SQL.\n- You: '.replace('[[turn_i]]', str(turn_i)).replace('[[turn_left]]', str(max_turn-turn_i+1))
             else:
                 sys_response, terminate_flag = extract_system_response(response_prev)
                 if terminate_flag == True:
                     data["Terminate_flg"] = True
                 user_response = extract_user_response(response_user_prev)
-                prompt = prompt + sys_response + "\n- User: " + user_response + '\n\n### Turn [[turn_i]] (1 turn left): \n# It is the final turn. You MUST provide the final PostgreSQL and follow the format: "<t>```sql [YOUR-SQL] ```</t>"\n- You: <t>'.replace('[[turn_i]]', str(turn_i))
+                prompt = prompt + sys_response + "\n- User: " + user_response + '\n\n### Turn [[turn_i]] (1 turn left): \n# It is the final turn. You MUST provide the final PostgreSQL and follow the format: "<t>```postgresql [YOUR-SQL] ```</t>"\n- You: <t>'.replace('[[turn_i]]', str(turn_i))
         
         if terminate_flag != True:  
             data['prompt_turn_'+str(turn_i)] = prompt
@@ -138,7 +138,7 @@ def wrap_up_prompt(data, DB_schema_path, external_kg_path, prompt_template, pati
         else:
             error_msg = "Are you sure about your SQL? You have one more chance to update your SQL now."
             
-        prompt = prompt.replace("- You: <t>", "- You: \n```sql \n") + data_sql_report.get('pred_sqls', '')[0] + '\n``` \n\n### Turn [[turn_i]]: \n# Your sql in previous turn may have problem. You MUST provide the updated PostgreSQL and follow the format: "<t>```sql [YOUR-SQL] ```</t>"\n-User: '.replace('[[turn_i]]', str(data['final_turn'])) + error_msg.strip() + '\n- You: <t>'
+        prompt = prompt.replace("- You: <t>", "- You: \n```postgresql \n") + data_sql_report.get('pred_sqls', '')[0] + '\n``` \n\n### Turn [[turn_i]]: \n# Your sql in previous turn may have problem. You MUST provide the updated PostgreSQL and follow the format: "<t>```postgresql [YOUR-SQL] ```</t>"\n-User: '.replace('[[turn_i]]', str(data['final_turn'])) + error_msg.strip() + '\n- You: <t>'
         
         data['prompt_turn_'+str(data['final_turn'])] = prompt
         data["prompt"] = prompt
@@ -149,7 +149,7 @@ def wrap_up_prompt(data, DB_schema_path, external_kg_path, prompt_template, pati
         data['final_turn'] = data['final_turn'] + 1
         follow_up_Q = data['follow_up']['query']
         
-        prompt = prompt.replace("- You: <t>", "- You: \n```sql \n") + data_sql_report.get('pred_sqls', '')[0] + '\n``` \n\n### Turn [[turn_i]]: \n# Here is a follow up question. You MUST provide the PostgreSQ to solve this question and follow the format: "<t>```sql [YOUR-SQL] ```</t>"\n-User: ```text \n'.replace('[[turn_i]]', str(data['final_turn'])) + follow_up_Q + '\n```\n\n- You: <t>'
+        prompt = prompt.replace("- You: <t>", "- You: \n```postgresql \n") + data_sql_report.get('pred_sqls', '')[0] + '\n``` \n\n### Turn [[turn_i]]: \n# Here is a follow up question. You MUST provide the PostgreSQ to solve this question and follow the format: "<t>```postgresql [YOUR-SQL] ```</t>"\n-User: ```text \n'.replace('[[turn_i]]', str(data['final_turn'])) + follow_up_Q + '\n```\n\n- You: <t>'
         data['prompt_turn_'+str(data['final_turn'])] = prompt
         data["prompt"] = prompt
         

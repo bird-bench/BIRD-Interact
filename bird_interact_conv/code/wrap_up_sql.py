@@ -9,9 +9,9 @@ def extract_system_response(original_response):
     if cut_prep != -1:
         original_response = original_response[:cut_prep]
         
-    if "```sql" in original_response:
-        cut_idx = original_response.find("```sql")
-        extracted_response = original_response[cut_idx:].replace("```sql", "").strip()
+    if "```postgresql" in original_response:
+        cut_idx = original_response.find("```postgresql")
+        extracted_response = original_response[cut_idx:].replace("```postgresql", "").strip()
         if "```" in extracted_response:
             cut_idx_1 = extracted_response.find("```") 
             extracted_response = extracted_response[:cut_idx_1].strip()
