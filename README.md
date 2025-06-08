@@ -155,9 +155,6 @@ python pull_data.py \
 ├── evaluation
 │   ├── docker-compose.yml
 │   ├── env
-│   ├── mssql_table_dumps
-│   ├── mysql_table_dumps
-│   ├── oracle_table_dumps
 │   ├── postgre_table_dumps
 │   ├── run
 │   └── src
