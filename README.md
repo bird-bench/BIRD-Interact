@@ -162,6 +162,7 @@ python pull_data.py \
 │   ├── ...
 └── requirements.txt
 ```
+The details about running **a-interact** can be found in `./bird_interact_agent/README.md`; and **c-interact** can be found in `./bird_interact_conv/README.md`.
 
 ### Environment Setup
 To run the baseline code you need to install the following dependencies:
@@ -182,7 +183,7 @@ cd evaluation
 docker compose up --build
 ```
 4. Interact with the database
-You can use the `perform_query_on_postgresql_databases()` function in the `evaluation/src/postgresql_utils.py` file to interact with the each database. The function will return the result of the query.
+You can use the `perform_query_on_postgresql_databases()` function in the `evaluation/src/postgresql_utils.py` file to interact with each database. The function will return the result of the query.
 5. Run the evaluation script inside the so_eval_env container
 ```bash
 docker compose exec so_eval_env bash
@@ -191,7 +192,6 @@ bash run_eval.sh
 ```
 
 The output report file will be saved in the same folder as your input file. 
-If you want the log file for each instance, you can set the `--logging` to `true` in the `run_eval.sh` script.
 
 ## 📋 Todo Lists
 
