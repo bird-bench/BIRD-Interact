@@ -139,9 +139,7 @@ python pull_data.py \
   --output_folder path/to/output_dir # output folder of the split files
 ``` -->
 
-## 💨 Quick Eval
-
-### Folder Structure
+## Folder Structure
 ```ultree
 .
 ├── LICENSE
@@ -164,26 +162,6 @@ python pull_data.py \
 ```
 The details about running **a-interact** can be found in `./bird_interact_agent/README.md`; and **c-interact** can be found in `./bird_interact_conv/README.md`.
 
-### Evaluation
-We use **docker** to provide a consistent environment for running the benchmark. To set up the environment, follow these steps:
-
-1. First download the PostgreSQL database from [the Google Drive](https://drive.google.com/file/d/1KABce6czIqL9kMyIX7i-_A0CIQoDnmyW/view).
-2. Unzip the folder and save it in the [`./evaluation/postgre_table_dumps`](./evaluation/postgre_table_dumps).
-3. Build the docker compose
-```bash
-cd evaluation
-docker compose up --build
-```
-4. Interact with the database
-You can use the `perform_query_on_postgresql_databases()` function in the `evaluation/src/postgresql_utils.py` file to interact with each database. The function will return the result of the query.
-5. Run the evaluation script inside the so_eval_env container
-```bash
-docker compose exec so_eval_env bash
-cd run
-bash run_eval.sh 
-```
-
-The output report file will be saved in the same folder as your input file. 
 
 ## 📋 Todo Lists
 
