@@ -33,7 +33,7 @@ def merge_jsonl_by_instance_id(source_path, response_path, output_path):
                 item = id_to_response[instance_id]
                 item["error_flg"] = False
             else:
-                if item["error_flg"] == False:
+                if "error_flg" in item and item["error_flg"] == False:
                     item["Terminate_flg"] = True
             if "prompt" in item:
                 del item["prompt"]
