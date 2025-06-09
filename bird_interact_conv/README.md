@@ -102,8 +102,6 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 3. To run the baseline code you need to install the following dependencies:
 ```bash
-conda create -n bird_interact python=3.10 -y
-conda activate bird_interact
 pip install -r requirements.txt
 ```
 
