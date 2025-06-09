@@ -65,11 +65,11 @@ bird_interact_conv/
 │   ├── collect_response.py    # Response collection utilities
 │   └── call_api.py           # API calling interface
 ├── pipeline/
-│   └── run_gemini.sh         # Pipeline execution script
+│   └── run_gpt.sh         # Pipeline execution script
 ├── prompts/
 │   └── prompts.py            # Conversation prompts and templates
 ├── data/
-│   └── ...                  # downloaded dataset
+│   └── bird-interact-lite    # downloaded dataset
 └── results/                  # Output directory for results
 ```
 
@@ -94,7 +94,6 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
    ```bash
    cd ../evaluation
    docker compose up --build
-   docker compose exec so_eval_env bash
    ```
    This launches two containers:
    - PostgreSQL database
@@ -102,6 +101,8 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 3. To run the baseline code you need to install the following dependencies:
 ```bash
+docker compose exec so_eval_env bash
+cd bird_interact_conv
 pip install -r requirements.txt
 ```
 
@@ -114,7 +115,8 @@ You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key i
    ```bash
    # Run the conversation pipeline, need to set the API key in code/config.py
    cd pipeline
-   bash run_gemini.sh
+   # Line 12: project_root="YOUR-ROOT" should be changed to your root (for example: "/app/bird_interact_conv")
+   bash run_gpt.sh
    ```
 Output directory: `results/`
 
@@ -130,7 +132,7 @@ Output directory: `results/`
 - `call_api.py`: Interface for API interactions
 
 ### Pipeline
-The `run_gemini.sh` script orchestrates the conversation flow, managing:
+The `run_gpt.sh` script orchestrates the conversation flow, managing:
 - User query processing
 - System response generation
 - SQL query execution
