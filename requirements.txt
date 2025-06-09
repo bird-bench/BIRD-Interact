@@ -17,7 +17,7 @@ grpcio-status==1.62.3
 h11==0.14.0
 httpcore==1.0.7
 httplib2==0.22.0
-httpx==0.27.2
+httpx==0.28.1
 idna==3.10
 jiter==0.8.2
 openai==1.55.3
