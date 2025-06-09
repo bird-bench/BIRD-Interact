@@ -31,12 +31,14 @@ Heuristically, we set higher cost for those actions interacting with users, i.e.
 
 ### Budget Calculation
 We set the budget case by case. 
-- **Starting Grants**: First, we assign a "starting grants", i.e. **6** *bird-coin*s, for each task. 
+- **Starting Budget** (adjustable parameter): First, we assign a "starting budget", (default **6** *bird-coin*s) for each task. 
 - **Ambiguity Resolution Budget**: Then, for the task with many ambiguities, it may require more budget to finish the task. Thus, we assign **2** *bird-coin*s for each ambiguity of the user query. 
-- **User Patience Budget**: Also, we introduce a adjustable *bird-coin*s to indicate the user patience, including four levels, **0**, **6**, **10**, **14** *bird-coin*s.
+- **User Patience Budget** (adjustable parameter): Also, we introduce a adjustable *bird-coin*s to indicate the user patience, including four basic levels, **0**, **6**, **10**, **14** *bird-coin*s.
 
-The total budget = starting grants + ambiguity resolution budget + user patience budget. You could find the budget calculation in batch-running implemented in [batch_run_bird_interact/main.py](batch_run_bird_interact/main.py#L110).
 
+The total budget = starting budget + ambiguity resolution budget + user patience budget. You could find the budget calculation in batch-running implemented in [batch_run_bird_interact/main.py](batch_run_bird_interact/main.py#L110).
+
+Current basic experiments are conducted with **Starting Budget** = **6** *bird-coin*s, **User Patience Budget** = **6** *bird-coin*s. Feel free to adjust these parameters to test different settings.
 
 
 ## Repository Structure
