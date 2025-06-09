@@ -100,11 +100,11 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
    - Evaluation environment (so_eval_env)
 
 3. To run the baseline code you need to install the following dependencies:
-```bash
-docker compose exec so_eval_env bash
-cd bird_interact_conv
-pip install -r requirements.txt
-```
+  ```bash
+  docker compose exec so_eval_env bash
+  cd bird_interact_conv
+  pip install -r requirements.txt
+  ```
 
 ### 3. API Configuration
 
