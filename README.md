@@ -66,21 +66,21 @@ The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benc
 | 7    | DeepSeek-V3        | 15.85 | ⚪ Basic          |
 
 #### 2. **a-Interact** Performance
-| Rank | Model Name         | Normalized Reward | Level              | Budget Parameters* | Avg Turns/Task | Avg Cost (USD)/Task |
-|------|--------------------|-------|---------------------|---------|----------------|---------------|
-| 1    | Claude-3.7-sonnet  | 29.19 | 🏆 Excellent Interaction | 6/6 | 15.4 | $0.6668 |
-| 2    | o3-mini            | 21.07 | 💎 Good Interaction      | 6/6 | 7.8 | $0.0754 | 
-| 3    | DeepSeek-V3        | 19.19 | 💎 Good Interaction      | 6/6 | 15.6 | $0.0629 |
-| 4    | Qwen3              | 18.74 | ✨ Standard              | 6/6 | 12.5 | $0.0278 |
-| 5    | GPT-4o             | 18.37 | ✨ Standard              | 6/6 | 15.3 | $0.4594 |
-| 6    | Gemini-2.0-flash   | 17.26 | ⚪ Basic                 | 6/6 | 13.2 | $0.0337 |
-| 7    | DeepSeek-R1        | 17.07 | ⚪ Basic                 | 6/6 | 12.0 | $0.0931 |
+| Rank | Model Name         | Budget Parameters* | Avg Turns/Task | Avg Cost (USD)/Task | Normalized Reward | Level              |
+|------|--------------------|-------------------|----------------|---------------------|-------------------|---------------------|
+| 1    | Claude-3.7-sonnet  | 6/6 | 15.4 | $0.6668 | 29.19 | 🏆 Excellent Interaction |
+| 2    | o3-mini            | 6/6 | 7.8 | $0.0754 | 21.07 | 💎 Good Interaction      |
+| 3    | DeepSeek-V3        | 6/6 | 15.6 | $0.0629 | 19.19 | 💎 Good Interaction      |
+| 4    | Qwen3              | 6/6 | 12.5 | $0.0278 | 18.74 | ✨ Standard              |
+| 5    | GPT-4o             | 6/6 | 15.3 | $0.4594 | 18.37 | ✨ Standard              |
+| 6    | Gemini-2.0-flash   | 6/6 | 13.2 | $0.0337 | 17.26 | ⚪ Basic                 |
+| 7    | DeepSeek-R1        | 6/6 | 12.0 | $0.0931 | 17.07 | ⚪ Basic                 |
 
-\* Budget Parameters: Starting Budget/User Patience Budget
+> \* Budget Parameters: Starting Budget/User Patience Budget
 
 ### Interaction-Time Scaling (ITS)
 
-Interaction-Time Scaling (ITS) refers to a model’s ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model’s idealized single-turn performance on a fully specified, unambiguous task, we say it satisfies the **ITS law**. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue. Currently, we only find claude-3-7-sonnet satisfies the ITS law.
+Interaction-Time Scaling (ITS) refers to a model's ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model's idealized single-turn performance on a fully specified, unambiguous task, we say it satisfies the **ITS law**. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue. Currently, we only find claude-3-7-sonnet satisfies the ITS law.
 
 <p align="center">
   <img src="materials/interaction_scaling_law.png" 
