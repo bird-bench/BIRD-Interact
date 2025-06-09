@@ -164,14 +164,6 @@ python pull_data.py \
 ```
 The details about running **a-interact** can be found in `./bird_interact_agent/README.md`; and **c-interact** can be found in `./bird_interact_conv/README.md`.
 
-### Environment Setup
-To run the baseline code you need to install the following dependencies:
-```bash
-conda create -n bird_interact python=3.10 -y
-conda activate bird_interact
-pip install -r requirements.txt
-```
-
 ### Evaluation
 We use **docker** to provide a consistent environment for running the benchmark. To set up the environment, follow these steps:
 
