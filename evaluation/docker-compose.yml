@@ -64,13 +64,13 @@ services:
   #     - oracle_data:/opt/oracle/oradata
   #     - ./oracle_table_dumps:/oracle_table_dumps
 
-  so_eval_env:
+  interact_eval_env:
     build:
       context: .
       dockerfile: ./env/Dockerfile.so_eval
-    container_name: so_eval_env
+    container_name: interact_eval_env
     volumes:
-      - ./:/app/
+      - ../:/app/
       - ./postgre_table_dumps:/app/postgre_table_dumps
       # - ./mssql_table_dumps:/app/mssql_table_dumps
       # - ./mysql_table_dumps:/app/mysql_table_dumps
