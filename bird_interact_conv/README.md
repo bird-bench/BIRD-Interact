@@ -69,8 +69,7 @@ bird_interact_conv/
 ├── prompts/
 │   └── prompts.py            # Conversation prompts and templates
 ├── data/
-│   ├── datasets/             # Conversation datasets
-│   └── DBs/                  # Database schemas
+│   └── ...                  # downloaded dataset
 └── results/                  # Output directory for results
 ```
 
@@ -79,6 +78,7 @@ bird_interact_conv/
 ### 1. Data Preparation
 
 ```bash
+mkdir data
 cd data
 git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 # Combine with GT fields (contact us for access) into bird_interact_data.jsonl
