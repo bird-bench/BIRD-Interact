@@ -66,15 +66,15 @@ The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benc
 | 7    | DeepSeek-V3        | 15.85 | ⚪ Basic          |
 
 #### 2. **a-Interact** Performance
-| Rank | Model Name         | Normalized Reward | Level              |
-|------|--------------------|-------|---------------------|
-| 1    | Claude-3.7-sonnet  | 29.19 | 🏆 Excellent Interaction |
-| 2    | o3-mini            | 21.07 | 💎 Good Interaction      |
-| 3    | DeepSeek-V3        | 19.19 | 💎 Good Interaction      |
-| 4    | Qwen3              | 18.74 | ✨ Standard              |
-| 5    | GPT-4o             | 18.37 | ✨ Standard              |
-| 6    | Gemini-2.0-flash   | 17.26 | ⚪ Basic                 |
-| 7    | DeepSeek-R1        | 17.07 | ⚪ Basic                 |
+| Rank | Model Name         | Normalized Reward | Level              | Budget (Starting Budget/User Patience Budget) | Avg Turns/Task | Avg Cost (USD)/Task |
+|------|--------------------|-------|---------------------|---------|----------------|---------------|
+| 1    | Claude-3.7-sonnet  | 29.19 | 🏆 Excellent Interaction | 6/6 | 15.4 | $0.6668 |
+| 2    | o3-mini            | 21.07 | 💎 Good Interaction      | 6/6 | 7.8 | $0.0754 | 
+| 3    | DeepSeek-V3        | 19.19 | 💎 Good Interaction      | 6/6 | 15.6 | $0.0629 |
+| 4    | Qwen3              | 18.74 | ✨ Standard              | 6/6 | 12.5 | $0.0278 |
+| 5    | GPT-4o             | 18.37 | ✨ Standard              | 6/6 | 15.3 | $0.4594 |
+| 6    | Gemini-2.0-flash   | 17.26 | ⚪ Basic                 | 6/6 | 13.2 | $0.0337 |
+| 7    | DeepSeek-R1        | 17.07 | ⚪ Basic                 | 6/6 | 12.0 | $0.0931 |
 
 
 ### Interaction-Time Scaling (ITS)
