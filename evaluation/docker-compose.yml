@@ -5,7 +5,7 @@ services:
   #   build:
   #     context: .
   #     dockerfile: ./env/Dockerfile.mysql
-  #   container_name: bird_critic_mysql
+  #   container_name: bird_interact_mysql
   #   environment:
   #     MYSQL_ROOT_PASSWORD: 123123
   #   volumes:
@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: ./env/Dockerfile.postgresql
-    container_name: bird_critic_postgresql
+    container_name: bird_interact_postgresql
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 123123
@@ -38,7 +38,7 @@ services:
   #   build:
   #     context: .
   #     dockerfile: ./env/Dockerfile.mssql
-  #   container_name: bird_critic_sqlserver
+  #   container_name: bird_interact_sqlserver
   #   environment:
   #     ACCEPT_EULA: "Y"
   #     MSSQL_SA_PASSWORD: "Y.sa123123"
