@@ -66,7 +66,7 @@ The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benc
 | 7    | DeepSeek-V3        | 15.85 | ⚪ Basic          |
 
 #### 2. **a-Interact** Performance
-| Rank | Model Name         | Normalized Reward | Level              | Budget (Starting Budget/User Patience Budget) | Avg Turns/Task | Avg Cost (USD)/Task |
+| Rank | Model Name         | Normalized Reward | Level              | Budget Parameters* | Avg Turns/Task | Avg Cost (USD)/Task |
 |------|--------------------|-------|---------------------|---------|----------------|---------------|
 | 1    | Claude-3.7-sonnet  | 29.19 | 🏆 Excellent Interaction | 6/6 | 15.4 | $0.6668 |
 | 2    | o3-mini            | 21.07 | 💎 Good Interaction      | 6/6 | 7.8 | $0.0754 | 
@@ -76,6 +76,7 @@ The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benc
 | 6    | Gemini-2.0-flash   | 17.26 | ⚪ Basic                 | 6/6 | 13.2 | $0.0337 |
 | 7    | DeepSeek-R1        | 17.07 | ⚪ Basic                 | 6/6 | 12.0 | $0.0931 |
 
+\* Budget Parameters: Starting Budget/User Patience Budget
 
 ### Interaction-Time Scaling (ITS)
 
