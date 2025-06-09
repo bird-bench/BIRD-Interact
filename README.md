@@ -76,7 +76,7 @@ The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benc
 | 6    | Gemini-2.0-flash   | 6/6 | 13.2 | $0.0337 | 17.26 | ⚪ Basic                 |
 | 7    | DeepSeek-R1        | 6/6 | 12.0 | $0.0931 | 17.07 | ⚪ Basic                 |
 
-> \* Budget Parameters: Starting Budget/User Patience Budget
+> \* Budget Parameters: Starting Budget/User Patience Budget, measured by our virtual currency *bird-coin*s <img src="bird_interact_agent/materials/bird-coin.png" style="height: 1.5em; vertical-align: middle;">. Refer to [bird_interact_agent/README.md](bird_interact_agent/README.md) for more details.
 
 ### Interaction-Time Scaling (ITS)
 
