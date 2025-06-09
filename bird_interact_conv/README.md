@@ -116,6 +116,7 @@ You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key i
    # Run the conversation pipeline, need to set the API key in code/config.py
    cd pipeline
    # Line 12: project_root="YOUR-ROOT" should be changed to your root (for example: "/app")
+   # And you may tune the parameters starting from line 8.
    bash run_gpt.sh
    ```
 Output directory: `results/`
