@@ -74,6 +74,8 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 # Combine with GT fields (contact us for access) into bird_interact_data.jsonl
 ```
 
+> To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases in `bird_interact_data.jsonl`. please email bird.bench25@gmail.com with the tag [bird-interact-lite GT&Test Cases] in title for full set, which will be sent automatically.
+
 ### 2. Environment Setup
 
 1. Download the database dumps:
