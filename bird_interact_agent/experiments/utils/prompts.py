@@ -61,7 +61,7 @@ action
             - knowledge_name: string, name of the external knowledge to get definition.
         - output: string of external knowledge definition.
         - cost: 0.5 cost
-    - action: `get_all_knoweldge_definitions()` to get all external knowledge names with definitions.
+    - action: `get_all_knowledge_definitions()` to get all external knowledge names with definitions.
         - output: string of all external knowledge names with definitions.
         - cost: 1 cost
 - interaction_object: `User`
