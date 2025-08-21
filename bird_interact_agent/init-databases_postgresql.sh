@@ -42,18 +42,18 @@ declare -A DATABASE_MAPPING=(
     ["vaccine_template"]="shipments container transportinfo vaccinedetails regulatoryandmaintenance sensordata datalogger"
     ["gaming_template"]="testsessions performance deviceidentity mechanical audioandmedia rgb physicaldurability interactionandcontrol"
     ["museum_template"]="artifactscore artifactratings sensitivitydata exhibitionhalls showcases environmentalreadingscore airqualityreadings surfaceandphysicalreadings lightandradiationreadings conditionassessments riskassessments conservationandmaintenance usagerecords artifactsecurityaccess"
-    ["polar_template"]="equipment location operationmaintenance powerbattery engineandfluids transmission chassisandvehicle communication cabinenvironment lightingandsafety waterandwaste scientific weatherandstructure thermalsolarrwindandgrid"
+    ["polar_template"]="equipment location operationmaintenance powerbattery engineandfluids transmission chassisandvehicle communication cabinenvironment lightingandsafety waterandwaste scientific weatherandstructure thermalsolarwindandgrid"
     ["solar_template"]="plant panel performance electrical environment maintenance inverter alerts"
     ["robot_template"]="robot_record robot_details operation joint_performance joint_condition actuation_data mechanical_status system_controller maintenance_and_fault performance_and_safety"
-    ["virtual_template"]="fans virtualidols interactions membershipandspending engagementcommerceandcollection socialcommunity eventsandclub loyaltyandachievements moderationandcompliance preferencesandsettings supportandfeedback retentionandinfluence additionalnotes"
-    ["mental_template"]="facilities clinicians patients assessmentbasics encounters assessmentsymptomsandrisk assessmentsocialanddiagnosis treatmentbasictreatmentoutcomes"
+    ["virtual_template"]="fans virtualidols interactions membershipandspending engagement commerceandcollection socialcommunity eventsandclub loyaltyandachievements moderationandcompliance preferencesandsettings supportandfeedback retentionandinfluence additionalnotes"
+    ["mental_template"]="facilities clinicians patients assessmentbasics encounters assessmentsymptomsandrisk assessmentsocialanddiagnosis treatmentbasics treatmentoutcomes"
     ["news_template"]="users devices articles recommendations sessions systemperformance interactions interactionmetrics"   
-    ["insider_template"]="trader transactionrecord advancedbehaviorsentimentandfundamentals compliancecase investigationdetails enforcementactions"
-    ["crypto_template"]="users orders orderexecutions fees marketdatamarketstats analyticsindicators riskandmargin accountbalances systemmonitoring"
-    ["fake_template"]="account profilesessionbehaviornetworkmetrics contentbehaviormessaginganalysis technicalinfosecuritydetection moderationaction"
+    ["insider_template"]="trader transactionrecord advancedbehavior sentimentandfundamentals compliancecase investigationdetails enforcementactions"
+    ["crypto_template"]="users orders orderexecutions fees marketdata marketstats analyticsindicators riskandmargin accountbalances systemmonitoring"
+    ["fake_template"]="account profile sessionbehavior networkmetrics contentbehavior messaginganalysis technicalinfo securitydetection moderationaction"
     ["cybermarket_template"]="markets vendors buyers products transactions communication riskanalysis securitymonitoring investigation"
     ["credit_template"]="core_record employment_and_income expenses_and_assets bank_and_transactions credit_and_compliance credit_accounts_and_history"
-    ["disaster_template"]="disasterevents distributionhubssupplies transportation humanresources financials beneficiariesandassessments environmentandhealth coordinationandevaluation"
+    ["disaster_template"]="disasterevents distributionhubs operations supplies transportation humanresources financials beneficiariesandassessments environmentandhealth coordinationandevaluation"
 )
 
 
@@ -118,7 +118,7 @@ import_table_files() {
                 echo "Error importing ${sql_file} into database ${db_template}. Check /tmp/error.log for details."
             fi
         else
-            echo "Warning: SQL file ${sql_file} not found for table ${table}"
+            echo "Error: SQL file ${sql_file} not found for table ${table}"
         fi
     done
 }
