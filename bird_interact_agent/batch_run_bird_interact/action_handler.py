@@ -336,6 +336,7 @@ def execute_submit_action(sql: str, sample_status: 'SampleStatus', data_path_bas
                 try:
                     cur.execute(sample_status.successful_phase1_sql)
                 except Exception as p1_err:
+                    logger.error(f"Error executing stored Phase 1 SQL: {p1_err}")
                     raise RuntimeError(f"Error executing stored Phase 1 SQL: {p1_err}") from p1_err
 
                 # 3. Get and Run Cleanup SQL (after successful Phase 1 SQL)
@@ -372,10 +373,12 @@ def execute_submit_action(sql: str, sample_status: 'SampleStatus', data_path_bas
             test_cases = record["follow_up"].get("test_cases", [])
             sol_sqls = record["follow_up"].get("sol_sql", [])
             conditions = record["follow_up"].get("conditions", {})
+            category = record["follow_up"].get("category", "Query")
         elif current_phase == 1:
             test_cases = record.get("test_cases", [])
             sol_sqls = record.get("sol_sql", [])
             conditions = record.get("conditions", {})
+            category = record.get("category", "Query")
         else: # Phase 1 but no test cases defined? Or invalid phase?
             message = f"Cannot run test cases for Phase {current_phase}. No relevant data found."
             passed = False
@@ -401,7 +404,7 @@ def execute_submit_action(sql: str, sample_status: 'SampleStatus', data_path_bas
                     exec_globals = {'pred_query_result': pred_query_result, 'execute_queries': execute_queries}
                     exec_locals = {}
 
-                    if not test_cases: # Use default test case
+                    if category == "Query": # Use default test case
                         logger.debug(f"Sample {sample_status.idx}, Phase {current_phase}: Using default test case.")
                         try:
                             if isinstance(sql, str):
@@ -461,7 +464,11 @@ def execute_submit_action(sql: str, sample_status: 'SampleStatus', data_path_bas
             reward += phase_reward
             if current_phase == 1:
                 phase1_completed = True
-                sample_status.successful_phase1_sql = sql # Store successful phase 1 SQL
+                # ensure saved sql is stored as a stsring
+                if isinstance(sql, list):
+                    sample_status.successful_phase1_sql = "\n".join(sql)
+                else:
+                    sample_status.successful_phase1_sql = sql # Store successful phase 1 SQL
                 # Check if there is a phase 2
                 if "follow_up" in record and record["follow_up"] and record["follow_up"].get("query"):
                     observation = f"Phase 1 SQL Correct! (Reward: {phase_reward} points). Moving to Phase 2."
