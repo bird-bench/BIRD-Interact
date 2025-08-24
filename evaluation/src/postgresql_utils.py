@@ -17,7 +17,7 @@ DEFAULT_DB_CONFIG = {
     "maxconn": 10,
     "user": "root",
     "password": "123123",
-    "host": "bird_critic_postgresql",
+    "host": "bird_interact_postgresql",
     "port": 5432,
 }
 
