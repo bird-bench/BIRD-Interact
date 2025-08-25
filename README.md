@@ -27,6 +27,7 @@
       </div>
     </div>
   </details>
+
 </div>
 
 # BIRD-INTERACT 1.0 <img src="materials/hku-logo.jpg" alt="HKU Logo" width="50" style="vertical-align:middle;margin-left:10px;"> <img src="materials/google-cloud-logo.png" alt="Google Cloud Logo" width="50" style="vertical-align:middle;margin-left:10px;">
@@ -203,7 +204,7 @@ The details about running **a-interact** can be found in `./bird_interact_agent/
 - [x] Release lite version, bird-interact-lite (270).
 - [x] Release conversational version, bird-interact-conv.
 - [x] Release agent version, bird-interact-agent.
-- [ ] Release Full bird-interact-full (600).
+- [x] Release Full bird-interact-full (600).
 - [ ] SFT / RL an User Simulator
 
 ## Created By:
