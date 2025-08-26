@@ -198,6 +198,17 @@ python pull_data.py \
 ```
 The details about running **a-interact** can be found in `./bird_interact_agent/README.md`; and **c-interact** can be found in `./bird_interact_conv/README.md`.
 
+## 📰 News
+
+🚀 We're excited to announce the release of the **[BIRD-Interact-Full (600)](https://huggingface.co/datasets/birdsql/bird-interact-full)** set!  
+It's a tough one — the best LLMs are only achieving a **16.33%** success rate, with just **10.0%** on the `c-interact` and `a-interact` portions.  
+👉 For more details, please visit our [project website](https://bird-interact.github.io/).
+
+📬 We'll be sending the **Ground Truth & Test cases** to our mailing list this week.  
+If you want early access, please send an email as instructed on the site for an **automatic download**.  
+
+💾 On another note, we've also released a SQLite version of **[LiveSQLBench-Lite](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite-sqlite)** for easier local research.  
+The full **LiveSQLBench-Base** and **-Large** versions are coming soon!
 
 ## 📋 Todo Lists
 
@@ -209,3 +220,4 @@ The details about running **a-interact** can be found in `./bird_interact_agent/
 
 ## Created By:
 BIRD Team & Google Cloud
+
