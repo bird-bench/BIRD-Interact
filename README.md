@@ -62,10 +62,10 @@
 It's a tough one — the best LLMs are only achieving a **16.33%** success rate, with just **10.0%** on the `c-interact` and `a-interact` portions.  
 👉 For more details, please visit our [project website](https://bird-interact.github.io/).
 
-📬 We'll be sending the **Ground Truth & Test cases** to our mailing list this week.  
+- [2025-08-26] 📬 We'll be sending the **Ground Truth & Test cases** to our mailing list this week.  
 If you want early access, please send an email as instructed on the site for an **automatic download**.  
 
-💾 On another note, we've also released a SQLite version of **[LiveSQLBench-Lite](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite-sqlite)** for easier local research.  
+- [2025-08-26] 💾 On another note, we've also released a SQLite version of **[LiveSQLBench-Lite](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite-sqlite)** for easier local research.  
 The full **LiveSQLBench-Base** and **-Large** versions are coming soon!
 
 - [2025-08-22] **Bug Fix**: In Bird-Interact-Agent code, we fixed a bug that when evaluating phase-2 SQL, the stored phase-1 SQL cannot be executed successfully, leading to a lower success rate of Phase-2. This bug only affects those tasks where phase1 sql does some operations on the database, e.g. CREATE table, etc.
@@ -219,5 +219,6 @@ The details about running **a-interact** can be found in `./bird_interact_agent/
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
