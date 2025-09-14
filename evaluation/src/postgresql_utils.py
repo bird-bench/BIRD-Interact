@@ -152,7 +152,7 @@ def reset_and_restore_database(db_name, pg_password, logger=None):
     if logger is None:
         logger = PrintLogger()
 
-    pg_host = "bird_critic_postgresql"
+    pg_host = "bird_interact_postgresql"
     pg_port = 5432
     pg_user = "root"
 
@@ -246,7 +246,7 @@ def reset_and_restore_database(db_name, pg_password, logger=None):
 def create_ephemeral_db_copies(
     base_db_names, num_copies, pg_password, logger, max_retries=3
 ):
-    pg_host = "bird_critic_postgresql"
+    pg_host = "bird_interact_postgresql"
     pg_port = 5432
     pg_user = "root"
     env_vars = os.environ.copy()
@@ -344,7 +344,7 @@ def drop_ephemeral_dbs(ephemeral_db_pool_dict, pg_password, logger):
     """
     Delete all ephemeral databases created during the script execution.
     """
-    pg_host = "bird_critic_postgresql"
+    pg_host = "bird_interact_postgresql"
     pg_port = 5432
     pg_user = "root"
     env_vars = os.environ.copy()
@@ -488,7 +488,7 @@ def save_report_and_status(
         with open(report_file_path, "w") as report_file:
             report_file.write("--------------------------------------------------\n")
             report_file.write(
-                "BIRD CRITIC Stack Overflow Result Statistics (Postgres, Multi-Thread):\n"
+                "BIRD Interact Result Statistics (Postgres, Multi-Thread):\n"
             )
             report_file.write(f"Number of Instances: {total_instances}\n")
             report_file.write(
