@@ -141,7 +141,7 @@ The `run_gpt.sh` script orchestrates the conversation flow, managing:
 - Response collection and evaluation
 
 ### Prompts
-Please use the `prompts_for_bird_interact_full.py` when using the Bird-Interact-Full dataset. The `prompts.py` file contains templates and prompts used for:
+Please use the `prompts_for_bird_interact_full.py` when using the Bird-Interact-Full dataset. The `prompts.py` file is only used for Bird-Interact-Lite, which contains templates and prompts used for:
 - User query generation
 - System response formatting
 - SQL query construction
