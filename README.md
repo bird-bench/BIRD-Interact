@@ -57,7 +57,7 @@
 </div>
 
 ## ⚠️ Announcement  
-Please note that during the evaluation process, when Docker loads the databases, errors may occasionally occur (these will not terminate the process but will appear in the Docker logs). As a result, some databases may fail to load properly, leading to empty databases. This will cause the evaluation results to be abnormally low.  
+Please note that before your evaluation process, when Docker loads the databases, errors may occasionally occur due to environment inconsistency (these will not terminate the process but will appear in the Docker logs). As a result, some databases may fail to load properly, leading to empty databases. This will cause the evaluation results to be abnormally low.  
 👉 Therefore, we strongly recommend checking the Docker logs for any errors **before running the evaluation** and verifying that all databases have been successfully loaded.
 
 ## 📰 News
@@ -223,6 +223,7 @@ The details about running **a-interact** can be found in `./bird_interact_agent/
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
 
