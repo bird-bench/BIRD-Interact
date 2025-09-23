@@ -488,7 +488,7 @@ def save_report_and_status(
         with open(report_file_path, "w") as report_file:
             report_file.write("--------------------------------------------------\n")
             report_file.write(
-                "BIRD CRITIC Stack Overflow Result Statistics (Postgres, Multi-Thread):\n"
+                "BIRD Interact Result Statistics (Postgres, Multi-Thread):\n"
             )
             report_file.write(f"Number of Instances: {total_instances}\n")
             report_file.write(

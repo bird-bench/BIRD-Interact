@@ -67,7 +67,8 @@ bird_interact_conv/
 ├── pipeline/
 │   └── run_gpt.sh         # Pipeline execution script
 ├── prompts/
-│   └── prompts.py            # Conversation prompts and templates
+│   ├── prompts.py            # Conversation prompts and templates
+│   └── prompts_for_bird_interact_full.py   # The prompt for Bird-Interact-Full dataset
 ├── data/
 │   └── bird-interact-lite    # downloaded dataset
 └── results/                  # Output directory for results
@@ -140,11 +141,12 @@ The `run_gpt.sh` script orchestrates the conversation flow, managing:
 - Response collection and evaluation
 
 ### Prompts
-The `prompts.py` file contains templates and prompts used for:
+Please use the `prompts_for_bird_interact_full.py` when using the Bird-Interact-Full dataset. The `prompts.py` file is only used for Bird-Interact-Lite, which contains templates and prompts used for:
 - User query generation
 - System response formatting
 - SQL query construction
 - Error handling and clarification
+- You are welcome to use your own prompts when meeting our task settings.
 
 ### Results
 Results from conversation runs are stored in the `results/` directory.

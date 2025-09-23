@@ -26,62 +26,67 @@ def extract_response(original_response):
     return extracted_response
 
 def wrap_up_prompt(data, DB_schema_path, prompt_template, turn_i, data_sys, data_user_1):
+    try:
+        if "prompt" in data:
+            del data["prompt"]
+        
+        # re-run error cases: set flg  
+        if 'prediction_turn_'+str(turn_i) in data and "Error:" in data['prediction_turn_'+str(turn_i)]:
+            error_flg = True
+            data["error_flg"] = error_flg
+        elif data_sys["error_flg"] == True or data_user_1["error_flg"] == True:
+            error_flg = True
+            data["error_flg"] = error_flg
+        else:
+            error_flg = False
+            data["error_flg"] = error_flg
+        return_flg = 'prediction_turn_'+str(turn_i) in data and error_flg == False
+        
+        if "Terminate_flg" in data_sys and data_sys["Terminate_flg"] == True:
+            terminate_flag = True
+            data["Terminate_flg"] = True
+            data["final_turn"] = data_sys["final_turn"]
+            return data
+        elif return_flg:
+            return data
+        else:
+            terminate_flag = False
+            data["final_turn"] = data_sys["final_turn"]
+        
+        # Start
+        db_name = data.get('selected_database', '')    
+        with open(DB_schema_path.replace("[[DB_name]]", db_name), 'r', encoding='utf-8') as file:
+            DB_schema = file.read()
     
-    if "prompt" in data:
-        del data["prompt"]
+        ### prompt filling
+        if 'prediction_turn_'+str(turn_i) not in data_sys or 'prediction_turn_'+str(turn_i) not in data_user_1:
+            return data
+        prompt = prompt_template.replace('[[clarification_Q]]', extract_response(data_sys['prediction_turn_'+str(turn_i)]))
+        prompt = prompt.replace('[[Action]]', extract_response(data_user_1['prediction_turn_'+str(turn_i)]))
+        prompt = prompt.replace('[[amb_json]]', "user_query_ambiguity: \n" + json.dumps(data["user_query_ambiguity"], indent=4) + '\n\nknowledge_ambiguity: \n' + json.dumps(data["knowledge_ambiguity"], indent=4))
+        
+        sql_segs = ""
+        sol_sql_all = ""
+        cnt = 0
+        for sol_sql_i in data["sol_sql"]: 
+            sol_sql_all = sol_sql_all + sol_sql_i + "\n\n"
+            cnt += 1 
+            if cnt > 1:
+                sql_segs = sql_segs + "\n===\n"
+            for clause, text in segment_sql(sol_sql_i):
+                sql_segs = sql_segs + clause+ ":\n" + text + "\n\n"    
     
-    # re-run error cases: set flg  
-    if 'prediction_turn_'+str(turn_i) in data and "Error:" in data['prediction_turn_'+str(turn_i)]:
-        error_flg = True
-        data["error_flg"] = error_flg
-    elif data_sys["error_flg"] == True or data_user_1["error_flg"] == True:
-        error_flg = True
-        data["error_flg"] = error_flg
-    else:
-        error_flg = False
-        data["error_flg"] = error_flg
-    return_flg = 'prediction_turn_'+str(turn_i) in data and error_flg == False
+        prompt = prompt.replace('[[SQL_Glot]]', sql_segs.strip())
+        prompt = prompt.replace('[[GT_SQL]]', sol_sql_all.strip())
+        prompt = prompt.replace('[[DB_schema]]', DB_schema)
+        prompt = prompt.replace('[[clear_query]]', data.get("query", ""))
     
-    if "Terminate_flg" in data_sys and data_sys["Terminate_flg"] == True:
-        terminate_flag = True
-        data["Terminate_flg"] = True
-        data["final_turn"] = data_sys["final_turn"]
-        return data
-    elif return_flg:
-        return data
-    else:
-        terminate_flag = False
-        data["final_turn"] = data_sys["final_turn"]
-    
-    # Start
-    db_name = data.get('selected_database', '')    
-    with open(DB_schema_path.replace("[[DB_name]]", db_name), 'r', encoding='utf-8') as file:
-        DB_schema = file.read()
+        if terminate_flag != True:  
+            data['prompt_turn_'+str(turn_i)] = prompt
+            data["prompt"] = prompt
 
-    ### prompt filling
-    prompt = prompt_template.replace('[[clarification_Q]]', extract_response(data_sys['prediction_turn_'+str(turn_i)]))
-    prompt = prompt.replace('[[Action]]', extract_response(data_user_1['prediction_turn_'+str(turn_i)]))
-    prompt = prompt.replace('[[amb_json]]', "user_query_ambiguity: \n" + json.dumps(data["user_query_ambiguity"], indent=4) + '\n\nknowledge_ambiguity: \n' + json.dumps(data["knowledge_ambiguity"], indent=4))
-    
-    sql_segs = ""
-    sol_sql_all = ""
-    cnt = 0
-    for sol_sql_i in data["sol_sql"]: 
-        sol_sql_all = sol_sql_all + sol_sql_i + "\n\n"
-        cnt += 1 
-        if cnt > 1:
-            sql_segs = sql_segs + "\n===\n"
-        for clause, text in segment_sql(sol_sql_i):
-            sql_segs = sql_segs + clause+ ":\n" + text + "\n\n"    
-
-    prompt = prompt.replace('[[SQL_Glot]]', sql_segs.strip())
-    prompt = prompt.replace('[[GT_SQL]]', sol_sql_all.strip())
-    prompt = prompt.replace('[[DB_schema]]', DB_schema)
-    prompt = prompt.replace('[[clear_query]]', data.get("query", ""))
-
-    if terminate_flag != True:  
-        data['prompt_turn_'+str(turn_i)] = prompt
-        data["prompt"] = prompt
+    except Exception as e:
+        print(f"Error in user_2 prompt: {e}")
 
     return data
 
