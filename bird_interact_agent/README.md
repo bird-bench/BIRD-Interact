@@ -79,7 +79,7 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 ### 2. Environment Setup
 
 1. Download the database dumps:
-   - Get from: [Google Drive](https://drive.google.com/file/d/1KABce6czIqL9kMyIX7i-_A0CIQoDnmyW/view)
+   - Get from: [Google Drive](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view)
    - Move to current working directory `bird_interact_agent` and rename to `postgre_table_dumps`
 
 2. Build and run Docker containers:
