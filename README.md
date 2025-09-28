@@ -221,11 +221,12 @@ The details about running **a-interact** can be found in `./bird_interact_agent/
 - [x] Release Full bird-interact-full (600).
 - [ ] SFT / RL an User Simulator
 
-## 🙏 Acknowledgement
+## Acknowledgement
 We would like to express our sincere gratitude to **Irina Saparina**, **Mohammadreza Pourreza**, **Mehdi Bouzouina**, **Hailong Li**, **Jiatong Shi**, and Professor **Shinji Watanabe** for their fruitful discussions and valuable insights that helped improve this project.
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
 
