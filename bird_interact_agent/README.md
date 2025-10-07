@@ -64,7 +64,7 @@ Current basic experiments are conducted with **Starting Budget** = **6** *bird-c
 
 
 
-## Quick Start
+## Quick Start (BIRD-Interact-Lite)
 
 ### 1. Data Preparation
 
@@ -110,9 +110,9 @@ Configure in `src/llm_utils/config.py`:
 - Set `base_url`
 - Set `api_key`
 
-## Running Experiments
+### 4. Running Experiments
 
-### Start the Docker containers
+#### Start the Docker containers
 
 ```bash
 cd bird_interact_agent
@@ -121,14 +121,14 @@ docker compose exec so_eval_env bash
 
 
 
-### Single Sample Mode
+#### Single Sample Mode
 Single sample mode (`src/` and `experiments/`) is useful for debugging and workflow understanding
 ```bash
 bash run_experiment.sh
 ```
 Output directory: `outputs/single_runs/`
 
-### Batch Mode
+#### Batch Mode (recommend)
 Batch mode (`batch_run_bird_interact/`) is recommended for production runs
 ```bash
 bash run_batch_experiments.sh
@@ -138,3 +138,35 @@ Default user patience is set to 6.
 
 
 
+
+## Quick Start (BIRD-Interact-Full)
+
+The process of running experiments on the **Full** set is similar to that for the **Lite** set, with the following differences:
+
+1. **Dataset**
+
+   Use the Full dataset instead of the Lite one:
+   🔗 [birdsql/bird-interact-full](https://huggingface.co/datasets/birdsql/bird-interact-full)
+
+2. **Docker**
+
+   Rebuild the Docker image using the dumps from the Full set:
+   🔗 [bird-interact-full dumps](https://drive.google.com/file/d/1V9SFIWebi27JtaDUAScG1xE9ELbYcWLR/view)
+   
+   If you have built the image for Lite experiment, you can rebuild the image for the Full environment with the following commands:
+   ```bash
+   cd bird_interact_agent
+   docker compose down -v 
+   docker compose up --build     
+   ```
+   
+   Alternatively, you can create a new Docker container specifically for the Full set and use it when running experiments.
+
+   ‼️ Please check the Docker build logs carefully to ensure that the databases are built without errors. Otherwise, you will not be able to reproduce our experimental results.
+
+3. **User Simulator Prompt**
+
+   The user simulator prompt used for the **Lite** set experiment is defined in [`prompts.py`](./src/envs/user_simulator/prompts.py).
+   
+   For the **Full** set experiment, use [`prompts_for_bird_interact_full.py`](./src/envs/user_simulator/prompts_for_bird_interact_full.py) instead.
+   Therefore, you could update the import path in the code [prompt_utils.py](batch_run_bird_interact/prompt_utils.py) and [us_env_bird_interact.py](src/envs/user_simulator/us_env_bird_interact.py) to use `prompts_for_bird_interact_full.py` when running Full set experiments. 
