@@ -102,29 +102,29 @@ We are releasing a lite version of BIRD-INTERACT, `bird-interact-lite-exp`, whic
 
 The full version of BIRD-INTERACT, `bird-interact-full`, is a comprehensive benchmark that includes 600 tasks for PostgreSQL. It covers a wide range of SQL operations and user queries. The full version is coming soon.
 
-### Model Performance Results on BIRD-INTERACT Lite
+### Model Performance Results on BIRD-INTERACT-FULL
 
-#### 1. **c-Interact** Performance
+#### 1. **c-Interact Text-to-SQL** Performance
 | Rank | Model Name         | Normalized Reward | Level        |
 |:------:|--------------------|:-------:|:--------------:|
-| 1    | o3-mini            | 33.04 | 🏆 Excellent Chat |
-| 2    | GPT-4o             | 30.33 | 💎 Good Chat      |
-| 3    | Gemini-2.0-flash   | 27.41 | 💎 Good Chat      |
-| 4    | Claude-3.7-sonnet  | 26.60 | ✨ Standard       |
-| 5    | DeepSeek-R1        | 21.74 | ✨ Standard       |
-| 6    | Qwen3              | 20.33 | ⚪ Basic          |
-| 7    | DeepSeek-V3        | 15.85 | ⚪ Basic          |
+| 1    | Gemini-2.5-Pro     | 20.92 | 🏆 Excellent Chat |
+| 2    | O3-Mini            | 20.27 | 🏆 Excellent Chat |
+| 3    | Claude-Sonnet-4    | 18.35 | 💎 Good Chat      |
+| 4    | Qwen-3-Coder-480B  | 17.75 | 💎 Good Chat      |
+| 5    | Deepseek-Chat-V3.1 | 15.15 | ✨ Standard       |
+| 6    | Claude-Sonnet-3.7  | 13.87 | ✨ Standard       |
+| 7    | GPT-5              | 12.58 | ⚪ Basic          |
 
-#### 2. **a-Interact** Performance
-| Rank | Model Name         | Budget Parameters* | Avg Steps/Task | Avg Cost (USD)/Task | Normalized Reward | Level            |
-|:------:|--------------------|:-------------------:|:----------------:|:---------------------:|:-------------------:|:---------------------:|
-| 1    | Claude-3.7-sonnet  | 6/6 | 15.4 | $0.6668 | 29.19 | 🏆 Excellent Interaction |
-| 2    | o3-mini            | 6/6 | 7.8 | $0.0754 | 21.07 | 💎 Good Interaction      |
-| 3    | DeepSeek-V3        | 6/6 | 15.6 | $0.0629 | 19.19 | 💎 Good Interaction      |
-| 4    | Qwen3              | 6/6 | 12.5 | $0.0278 | 18.74 | ✨ Standard              |
-| 5    | GPT-4o             | 6/6 | 15.3 | $0.4594 | 18.37 | ✨ Standard              |
-| 6    | Gemini-2.0-flash   | 6/6 | 13.2 | $0.0337 | 17.26 | ⚪ Basic                 |
-| 7    | DeepSeek-R1        | 6/6 | 12.0 | $0.0931 | 17.07 | ⚪ Basic                 |
+#### 2. **a-Interact Text-to-SQL** Performance
+| Rank | Model Name         | Avg Cost (USD)/Task | Normalized Reward | Level            |
+|:------:|--------------------|:---------------------:|:-------------------:|:---------------------:|
+| 1    | GPT-5              | $0.24 | 25.52 | 🏆 Excellent Interaction |
+| 2    | Claude-Sonnet-4    | $0.51 | 23.28 | 💎 Good Interaction      |
+| 3    | Claude-Sonnet-3.7  | $0.60 | 17.45 | 💎 Good Interaction      |
+| 4    | Gemini-2.5-Pro     | $0.22 | 17.33 | ✨ Standard              |
+| 5    | O3-Mini            | $0.06 | 16.43 | ✨ Standard              |
+| 6    | Deepseek-Chat-V3.1 | $0.06 | 13.47 | ⚪ Basic                 |
+| 7    | Qwen-3-Coder-480B  | $0.07 | 10.58 | ⚪ Basic                 |
 
 > \* Budget Parameters: Starting Budget/User Patience Budget, measured by our virtual currency *bird-coin*s <img src="bird_interact_agent/materials/bird-coin.png" style="height: 1em; vertical-align: middle;">. Refer to [bird_interact_agent/README.md](bird_interact_agent/README.md#task-setting) for more details.
 
@@ -226,6 +226,7 @@ We would like to express our sincere gratitude to **Irina Saparina**, **Mohammad
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
 
