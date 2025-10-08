@@ -62,7 +62,7 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
-- [2025-10-08] 📝 Our **project paper** is now publicly available on [arXiv:2510.05318](https://arxiv.org/abs/2510.05318)!  
+- [2025-10-08] 📝 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** is now publicly available!  
   It presents the full details, methodology, and evaluation of our interactive text-to-SQL benchmark.  
   👉 Check it out and learn more about the ideas behind [BIRD-Interact](https://bird-interact.github.io/).
 
@@ -230,6 +230,7 @@ We would like to express our sincere gratitude to **Irina Saparina**, **Mohammad
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
 
