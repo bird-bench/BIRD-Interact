@@ -62,6 +62,10 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
+- [2025-10-08] 📝 Our **project paper** is now publicly available on [arXiv:2510.05318](https://arxiv.org/abs/2510.05318)!  
+  It presents the full details, methodology, and evaluation of our interactive text-to-SQL benchmark.  
+  👉 Check it out and learn more about the ideas behind [BIRD-Interact](https://bird-interact.github.io/).
+
 - [2025-08-26] 🚀 We're excited to announce the release of the **[BIRD-Interact-Full (600)](https://huggingface.co/datasets/birdsql/bird-interact-full)** set!  
 It's a tough one — the best LLMs are only achieving a **16.33%** success rate, with just **10.0%** on the `c-interact` and `a-interact` portions.  
 👉 For more details, please visit our [project website](https://bird-interact.github.io/).
@@ -226,6 +230,7 @@ We would like to express our sincere gratitude to **Irina Saparina**, **Mohammad
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
 
