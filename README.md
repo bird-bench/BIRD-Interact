@@ -60,6 +60,8 @@
 Please note that before your evaluation process, when Docker loads the databases, errors may occasionally occur due to environment inconsistency (these will not terminate the process but will appear in the Docker logs). As a result, some databases may fail to load properly, leading to empty databases. This will cause the evaluation results to be abnormally low.  
 👉 Therefore, we strongly recommend checking the Docker logs for any errors **before running the evaluation** and verifying that all databases have been successfully loaded.
 
+👉 We have updated the **Submission Guidelines**, where the customized agent scaffolds are supported. Please feel free to take a look at our detailed submission guidelines [here](https://docs.google.com/document/d/1F1DSqHDBzGvXFlWU8iCl9otkqxIefgcH/edit?usp=sharing&ouid=108161566779099489782&rtpof=true&sd=true).
+
 ## 📰 News
 
 - [2025-10-08] 📝 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** is now publicly available!  
@@ -230,6 +232,7 @@ We would like to express our sincere gratitude to **Irina Saparina**, **Mohammad
 
 ## Created By:
 BIRD Team & Google Cloud
+
 
 
 
