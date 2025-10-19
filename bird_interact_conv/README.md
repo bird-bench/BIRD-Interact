@@ -87,20 +87,17 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 ### 2. Environment Setup
 
-1. Download the database dumps:
-   - Get from: [Google Drive](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view)
-   - Move to working directory of `../evaluation` and rename to `postgre_table_dumps`
-
-2. Build and run Docker containers:
+2. Build and run Docker containers (using prebuilt images; no DB dumps downloading needed):
    ```bash
    cd ../evaluation
-   docker compose up --build
+   docker compose pull 
+   docker compose up -d
    ```
-   This launches two containers:
+   This launches two containers using images from Docker Hub:
    - PostgreSQL database
    - Evaluation environment (interact_eval_env)
 
-3. To run the baseline code you need to install the following dependencies:
+3. To run the baseline code you need still to install the following dependencies:
   ```bash
   docker compose exec interact_eval_env bash
   cd bird_interact_conv

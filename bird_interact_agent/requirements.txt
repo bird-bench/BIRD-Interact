@@ -42,7 +42,6 @@ pandas==2.1.0
 numpy==1.26.1
 sqlparse==0.5.2
 rich==13.9.4
-pymssql==2.3.2
 jsonlines==4.0.0
 config==0.5.1
 gymnasium==1.1.1

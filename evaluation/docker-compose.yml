@@ -15,9 +15,7 @@ services:
   #     - "3306:3306"
 
   postgresql:
-    build:
-      context: .
-      dockerfile: ./env/Dockerfile.postgresql
+    image: docker.io/shawnxxh/bird-interact-postgresql:latest
     container_name: bird_interact_postgresql
     environment:
       POSTGRES_USER: root
@@ -25,7 +23,6 @@ services:
       TZ: "Asia/Hong_Kong"
     volumes:
       - postgresql_data:/var/lib/postgresql/data
-      - ./postgre_table_dumps:/docker-entrypoint-initdb.d/postgre_table_dumps
     command:
       - "-c"
       - "max_connections=300"
@@ -65,13 +62,11 @@ services:
   #     - ./oracle_table_dumps:/oracle_table_dumps
 
   interact_eval_env:
-    build:
-      context: .
-      dockerfile: ./env/Dockerfile.so_eval
+    image: docker.io/shawnxxh/bird-interact-conv-so-eval:latest
     container_name: interact_eval_env
     volumes:
       - ../:/app/
-      - ./postgre_table_dumps:/app/postgre_table_dumps
+      # - ./postgre_table_dumps:/app/postgre_table_dumps
       # - ./mssql_table_dumps:/app/mssql_table_dumps
       # - ./mysql_table_dumps:/app/mysql_table_dumps
     depends_on:
