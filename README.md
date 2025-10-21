@@ -64,6 +64,8 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
+- [2025-10-21] 🚀 Docker update: We have pushed the new docker images (Base/Full DB Env and two evaluation Env) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually!
+
 - [2025-10-08] 📝 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** is now publicly available!  
   It presents the full details, methodology, and evaluation of our interactive text-to-SQL benchmark.  
   👉 Check it out and know more about the ideas behind [BIRD-Interact](https://bird-interact.github.io/).

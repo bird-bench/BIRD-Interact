@@ -87,14 +87,15 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 ### 2. Environment Setup
 
-2. Build and run Docker containers (using prebuilt images; no DB dumps downloading needed):
+2. Build and run Docker containers for both bird-interact-lite and bird-interact-full environments (using prebuilt images; no DB dumps downloading needed):
    ```bash
    cd ../evaluation
    docker compose pull 
    docker compose up -d
    ```
-   This launches two containers using images from Docker Hub:
-   - PostgreSQL database
+   This launches 3 containers using images from Docker Hub:
+   - PostgreSQL database for bird-interact-lite
+   - PostgreSQL database for bird-interact-full
    - Evaluation environment (interact_eval_env)
 
 3. To run the baseline code you need still to install the following dependencies:
@@ -108,7 +109,7 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key in the `code/config.py` file
 
-## Running Experiments
+## Running Experiments (BIRD-Interact-Lite)
 
    ```bash
    # Run the conversation pipeline, need to set the API key in code/config.py
@@ -119,6 +120,10 @@ You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key i
    ```
 Output directory: `results/`
 
+## Running Experiments (BIRD-Interact-Full)
+- Dataset: use the Full dataset and DB metafiles instead of the Lite one:
+- Host: Change the host in `evaluation/src/postgresql_utils.py` from `bird_interact_postgresql` to `bird_interact_postgresql_full` to ensure that the SQL is executed on the Full DB.
+- User simulator prompt: Use the `prompts_for_bird_interact_full.py` file instead of the `prompts.py` file.
 
 ## Components
 

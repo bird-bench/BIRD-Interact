@@ -63,6 +63,24 @@ Current basic experiments are conducted with **Starting Budget** = **6** *bird-c
 
 
 
+## Environment Setup
+
+
+1. Run Docker containers for both bird-interact-lite and bird-interact-full environments (using prebuilt images; no DB dumps downloading needed):
+   ```bash
+   cd bird_interact_agent
+   docker compose pull 
+   docker compose up -d
+   ```
+   This launches 3 containers using images from Docker Hub:
+   - PostgreSQL database for bird-interact-lite
+   - PostgreSQL database for bird-interact-full
+   - Evaluation environment (so_eval_env)
+
+2. (Optionally) Build the docker manually: You could also downdload the dumps from [bird-interact-lite](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view) and [bird-interact-full](https://drive.google.com/file/d/1V9SFIWebi27JtaDUAScG1xE9ELbYcWLR/view) and then build the docker manually.
+
+‼️ Please check the Docker build logs carefully to ensure that the databases are built without errors. Otherwise, you will not be able to reproduce our experimental results.
+
 
 ## Quick Start (BIRD-Interact-Lite)
 
@@ -76,20 +94,8 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 
 > To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases in `bird_interact_data.jsonl`. please email bird.bench25@gmail.com with the tag [bird-interact-lite GT&Test Cases] in title for full set, which will be sent automatically.
 
-### 2. Environment Setup
 
-
-1. Run Docker containers (using prebuilt images; no DB dumps downloading needed):
-   ```bash
-   cd bird_interact_agent
-   docker compose pull 
-   docker compose up -d
-   ```
-   This launches two containers using images from Docker Hub:
-   - PostgreSQL database
-   - Evaluation environment (so_eval_env)
-
-### 3. API Configuration
+### 2. API Configuration
 
 #### VertexAI Setup
 
@@ -108,7 +114,7 @@ Configure in `src/llm_utils/config.py`:
 - Set `base_url`
 - Set `api_key`
 
-### 4. Running Experiments
+### 3. Running Experiments
 
 #### Start the Docker containers
 
@@ -136,7 +142,6 @@ Default user patience is set to 6.
 
 
 
-
 ## Quick Start (BIRD-Interact-Full)
 
 The process of running experiments on the **Full** set is similar to that for the **Lite** set, with the following differences:
@@ -146,22 +151,9 @@ The process of running experiments on the **Full** set is similar to that for th
    Use the Full dataset instead of the Lite one:
    🔗 [birdsql/bird-interact-full](https://huggingface.co/datasets/birdsql/bird-interact-full)
 
-2. **Docker**
-
-   Rebuild the Docker image using the dumps from the Full set:
-   🔗 [bird-interact-full dumps](https://drive.google.com/file/d/1V9SFIWebi27JtaDUAScG1xE9ELbYcWLR/view)
+2. **Change Host to Full DB**: 
+   - Change the host in `bird_interact_agent/src/config/db_config.py` from `bird_interact_postgresql` to `bird_interact_postgresql_full`. 
    
-   If you have built the image for Lite experiment, you can rebuild the image for the Full environment with the following commands:
-   ```bash
-   cd bird_interact_agent
-   docker compose down -v 
-   docker compose up --build     
-   ```
-   
-   Alternatively, you can create a new Docker container specifically for the Full set and use it when running experiments.
-
-   ‼️ Please check the Docker build logs carefully to ensure that the databases are built without errors. Otherwise, you will not be able to reproduce our experimental results.
-
 3. **User Simulator Prompt**
 
    The user simulator prompt used for the **Lite** set experiment is defined in [`prompts.py`](./src/envs/user_simulator/prompts.py).
