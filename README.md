@@ -148,6 +148,10 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
 ## Environment Setup
 
 1. Run Docker containers for bird-interact-lite database, bird-interact-full database, and evaluation environment:
+  
+  | If you just want to evaluate on `bird-interact-lite`, you could comment out the [`postgresql_full` service](./env/docker-compose.yml#L21-L31) in `docker-compose.yml` to speed up the environment setup.
+  
+  Start the environment by running: 
    ```bash
    cd env
    docker compose pull 
@@ -186,27 +190,29 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
    If errors occur, `"Errors occurred during import:"` will be printed in the log files.
 
 
--  Test the database containers are running correctly:
-   Take `bird_interact_postgresql` as example:
-   Start the `bird_interact_eval` container and connect to the `bird_interact_postgresql` database:
+-  Check if the database containers are in good shape.
+   
+   Use our provided Python script to verify database metadata:
    ```bash
    docker compose exec bird_interact_eval bash
-   psql -h bird_interact_postgresql  # passwd: 123123
-   ```
-   Then list the databases.
-   ```sql
-   \l
-   ```
-   You should see the databases, and you could execute SQL commands on it:
-   ```
-                                                         List of databases
-            Name          | Owner | Encoding | Locale Provider |  Collate   |   Ctype    | Locale | ICU Rules | Access privileges 
-   ------------------------+-------+----------+-----------------+------------+------------+--------+-----------+-------------------
-   alien                  | root  | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
-   alien_template         | root  | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
-   ...
+   cd /app/env
+   python check_db_metadata.py --host bird_interact_postgresql
+   python check_db_metadata.py --host bird_interact_postgresql_full
    ```
    
+   Expected results:
+   - **bird-interact-lite**: 
+     - 📈 Total Databases: 18
+     - 📋 Total Tables: 175
+     - 🔢 Total Columns: 2286
+     - 📈 Avg Rows per Table: 1,038.48
+     - 💾 Total Size: 207.15 MB (around)
+   - **bird-interact-full**: 
+     - 📈 Total Databases: 22
+     - 📋 Total Tables: 244
+     - 🔢 Total Columns: 2011
+     - 📈 Avg Rows per Table: 1,121.19
+     - 💾 Total Size: 272.00 MB (around)
 
 
 ## 📦 Dataset Details
