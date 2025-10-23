@@ -153,7 +153,7 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
    docker compose pull 
    docker compose up -d
    ```
-   Wait for several minutes for building.
+   Wait for several minutes for database initialization.
    
    This runs 3 containers using prebuilt images from Docker Hub:
    - `bird_interact_postgresql`: PostgreSQL database for bird-interact-lite
