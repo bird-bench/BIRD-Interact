@@ -96,7 +96,7 @@ Configure in `src/llm_utils/config.py`:
 
 ### 3. Running Experiments
 
-#### Start the Docker containers
+#### Start the Evaluation Environment
 
 ```bash
 cd env/
