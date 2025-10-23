@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-
   postgresql:
     image: docker.io/shawnxxh/bird-interact-postgresql:latest
     container_name: bird_interact_postgresql
@@ -11,6 +10,11 @@ services:
       TZ: "Asia/Hong_Kong"
     volumes:
       - postgresql_data:/var/lib/postgresql/data
+    command:
+      - "-c"
+      - "max_connections=300"
+      - "-c"
+      - "shared_buffers=256MB"
     ports:
       - "5432:5432"
 
@@ -23,19 +27,23 @@ services:
       TZ: "Asia/Hong_Kong"
     volumes:
       - postgresql_data_full:/var/lib/postgresql/data
+    command:
+      - "-c"
+      - "max_connections=300"
+      - "-c"
+      - "shared_buffers=256MB"
     ports:
       - "5433:5432"
 
-  so_eval_env:
-    image: docker.io/shawnxxh/bird-interact-agent-so-eval:latest
-    container_name: bird_interact_so_eval_env
+  bird_interact_eval:
+    image: docker.io/shawnxxh/bird-interact-eval:latest
+    container_name: bird_interact_eval
     volumes:
-      - ./:/app/
+      - ../:/app/
     depends_on:
       - postgresql
       - postgresql_full
     command: ["tail", "-f", "/dev/null"]
-
 
 volumes:
   postgresql_data:

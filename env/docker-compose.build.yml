@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   postgresql:
-    image: docker.io/shawnxxh/bird-interact-postgresql:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.postgresql
     container_name: bird_interact_postgresql
     environment:
       POSTGRES_USER: root
@@ -19,7 +21,9 @@ services:
       - "5432:5432"
 
   postgresql_full:
-    image: docker.io/shawnxxh/bird-interact-postgresql-full:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.postgresql_full
     container_name: bird_interact_postgresql_full
     environment:
       POSTGRES_USER: root
@@ -35,9 +39,11 @@ services:
     ports:
       - "5433:5432"
 
-  interact_eval_env:
-    image: docker.io/shawnxxh/bird-interact-conv-so-eval:latest
-    container_name: interact_eval_env
+  bird_interact_eval:
+    build:
+      context: .
+      dockerfile: Dockerfile.bird_interact_eval
+    container_name: bird_interact_eval
     volumes:
       - ../:/app/
     depends_on:

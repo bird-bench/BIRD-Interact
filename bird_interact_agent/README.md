@@ -51,9 +51,6 @@ Current basic experiments are conducted with **Starting Budget** = **6** *bird-c
 ├── data/                       # Dataset storage
 ├── outputs/                    # Experiment results: single-run and batch-run results
 ├── postgre_table_dumps/        # PostgreSQL database dumps
-├── Dockerfile.postgresql       # PostgreSQL container configuration
-├── Dockerfile.so_eval         # Evaluation environment configuration
-├── docker-compose.yml         # Container orchestration
 ├── requirements.txt           # Python dependencies
 ├── run_batch_experiments.sh   # Batch experiment runner
 └── run_experiment.sh          # Single experiment runner
@@ -61,25 +58,8 @@ Current basic experiments are conducted with **Starting Budget** = **6** *bird-c
 
 
 
-
-
 ## Environment Setup
-
-
-1. Run Docker containers for both bird-interact-lite and bird-interact-full environments (using prebuilt images; no DB dumps downloading needed):
-   ```bash
-   cd bird_interact_agent
-   docker compose pull 
-   docker compose up -d
-   ```
-   This launches 3 containers using images from Docker Hub:
-   - PostgreSQL database for bird-interact-lite
-   - PostgreSQL database for bird-interact-full
-   - Evaluation environment (so_eval_env)
-
-2. (Optionally) Build the docker manually: You could also downdload the dumps from [bird-interact-lite](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view) and [bird-interact-full](https://drive.google.com/file/d/1V9SFIWebi27JtaDUAScG1xE9ELbYcWLR/view) and then build the docker manually.
-
-‼️ Please check the Docker build logs carefully to ensure that the databases are built without errors. Otherwise, you will not be able to reproduce our experimental results.
+Please refer to [README.md](../README.md#environment-setup) for the environment setup for both `a-Interact` and `c-Interact`.
 
 
 ## Quick Start (BIRD-Interact-Lite)
@@ -119,11 +99,10 @@ Configure in `src/llm_utils/config.py`:
 #### Start the Docker containers
 
 ```bash
-cd bird_interact_agent
-docker compose exec so_eval_env bash
+cd env/
+docker compose exec bird_interact_eval bash
+cd bird_interact_agent/
 ```
-
-
 
 #### Single Sample Mode
 Single sample mode (`src/` and `experiments/`) is useful for debugging and workflow understanding

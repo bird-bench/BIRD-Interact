@@ -64,7 +64,7 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
-- [2025-10-21] 🚀 Docker update: We added the docker for Full DB Env. And we pushed the docker images (Base/Full DB Env and two evaluation Env) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually!
+- [2025-10-21] 🚀 Docker update: We added the docker for Full DB Env. And we pushed 3 docker images (Base/Full DB Env and the evaluation environment for both `a-Interact` and `c-Interact`) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually!
 
 - [2025-10-08] 📝 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** is now publicly available!  
   It presents the full details, methodology, and evaluation of our interactive text-to-SQL benchmark.  
@@ -144,6 +144,70 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
   <img src="materials/interaction_scaling_law.png" 
        style="width: 100%; min-width: 100px; display: block; margin: auto; ">
 </p>
+
+## Environment Setup
+
+1. Run Docker containers for bird-interact-lite database, bird-interact-full database, and evaluation environment:
+   ```bash
+   cd env
+   docker compose pull 
+   docker compose up -d
+   ```
+   Wait for several minutes for building.
+   
+   This runs 3 containers using prebuilt images from Docker Hub:
+   - `bird_interact_postgresql`: PostgreSQL database for bird-interact-lite
+   - `bird_interact_postgresql_full`: PostgreSQL database for bird-interact-full
+   - `bird_interact_eval`: Evaluation environment for both `a-Interact` and `c-Interact`.
+
+   Now, you could start the evaluation environment by executing the following command:
+   ```bash
+   docker compose exec bird_interact_eval bash
+   ```
+
+2. (Optional) Build the environment manually (if you want to build the images from scratch): 
+   - Downdload the database dumps 
+      - [bird-interact-lite](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view). Unzip and rename it as `env/postgre_table_dumps`.
+      - [bird-interact-full](https://drive.google.com/file/d/1V9SFIWebi27JtaDUAScG1xE9ELbYcWLR/view). Unzip and rename it as `env/postgre_table_dumps_full`.
+   - Build the environment manually by running `docker-compose.build.yml`.
+      ```bash
+      cd env/
+      docker compose -f docker-compose.build.yml build
+      docker compose -f docker-compose.build.yml up -d
+      ```
+
+3. (Recommended) Check the database containers are built and running successfully.
+
+-  Print the container build logs to ensure that the databases are built successfully without errors:
+   ```bash 
+   docker logs bird_interact_postgresql > build_bird_interact_postgresql.log 2>&1
+   docker logs bird_interact_postgresql_full > build_bird_interact_postgresql_full.log 2>&1
+   ```
+   If errors occur, `"Errors occurred during import:"` will be printed in the log files.
+
+
+-  Test the database containers are running correctly:
+   Take `bird_interact_postgresql` as example:
+   Start the `bird_interact_eval` container and connect to the `bird_interact_postgresql` database:
+   ```bash
+   docker compose exec bird_interact_eval bash
+   psql -h bird_interact_postgresql  # passwd: 123123
+   ```
+   Then list the databases.
+   ```sql
+   \l
+   ```
+   You should see the databases, and you could execute SQL commands on it:
+   ```
+                                                         List of databases
+            Name          | Owner | Encoding | Locale Provider |  Collate   |   Ctype    | Locale | ICU Rules | Access privileges 
+   ------------------------+-------+----------+-----------------+------------+------------+--------+-----------+-------------------
+   alien                  | root  | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
+   alien_template         | root  | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
+   ...
+   ```
+   
+
 
 ## 📦 Dataset Details
 

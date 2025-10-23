@@ -85,29 +85,21 @@ git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 # Combine with GT fields (contact us for access) into bird_interact_data.jsonl
 ```
 
-### 2. Environment Setup
+### 2. Environment Start
 
-2. Build and run Docker containers for both bird-interact-lite and bird-interact-full environments (using prebuilt images; no DB dumps downloading needed):
-   ```bash
-   cd ../evaluation
-   docker compose pull 
-   docker compose up -d
-   ```
-   This launches 3 containers using images from Docker Hub:
-   - PostgreSQL database for bird-interact-lite
-   - PostgreSQL database for bird-interact-full
-   - Evaluation environment (interact_eval_env)
+Please refer to [README.md](../README.md#environment-setup) for the environment setup for both `a-Interact` and `c-Interact`.
 
-3. To run the baseline code you need still to install the following dependencies:
-  ```bash
-  docker compose exec interact_eval_env bash
-  cd bird_interact_conv
-  pip install -r requirements.txt
-  ```
+Start the evaluation environment:
+```bash
+cd env/
+docker compose exec bird_interact_eval bash
+cd bird_interact_conv/
+```
 
 ### 3. API Configuration
 
 You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key in the `code/config.py` file
+
 
 ## Running Experiments (BIRD-Interact-Lite)
 
