@@ -64,7 +64,9 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
-- [2025-10-21] 🚀 Docker update: We added the docker for Full DB Env. And we pushed 3 docker images (Base/Full DB Env and the evaluation environment for both `a-Interact` and `c-Interact`) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually!
+- [2025-11-06] 🐛 **Bug Fix** & 🐳 **Docker update**: Update the sqlglot version to 26.16.4 to fix the bug that the sql parser cannot parse the SQL correctly for user simulator. You could fix this by re-install it by `pip install sqlglot==26.16.4` in the `bird_interact_eval` env. The `bird_interact_eval` image is also updated, so you could also pull it and recreate the `bird_interact_eval` container.
+
+- [2025-10-21] 🐳 **Docker update**: We added the docker for Full DB Env. And we pushed 3 docker images (Base/Full DB Env and the evaluation environment for both `a-Interact` and `c-Interact`) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually!
 
 - [2025-10-08] 📝 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** is now publicly available!  
   It presents the full details, methodology, and evaluation of our interactive text-to-SQL benchmark.  
@@ -149,7 +151,7 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
 
 1. Run Docker containers for bird-interact-lite database, bird-interact-full database, and evaluation environment:
   
-  | If you just want to evaluate on `bird-interact-lite`, you could comment out the [`postgresql_full` service](./env/docker-compose.yml#L21-L31) in `docker-compose.yml` to speed up the environment setup.
+  > If you just want to evaluate on `bird-interact-lite`, you could comment out the [`postgresql_full` service](./env/docker-compose.yml#L21-L31) in `docker-compose.yml` to speed up the environment setup.
   
   Start the environment by running: 
    ```bash
@@ -157,7 +159,25 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
    docker compose pull 
    docker compose up -d
    ```
-   Wait for several minutes for database initialization.
+   Wait for several minutes for database initialization. 
+   
+  You could track the building progress by:
+  ```bash
+  docker compose logs -f --tail=100 bird_interact_postgresql_full # or bird_interact_postgresql for bird-interact-lite
+  ```
+  If finished, you should see the logs without errors like:
+
+  ```bash
+  bird_interact_postgresql_full  | 2025-10-28 17:58:30.413 HKT [1] LOG:  database system is ready to accept connection
+  ```
+
+  If you have created containers before and want to recreate it, you could run the following command:
+  ```bash
+  docker compose down -v # this cmd removes the containers and the volumes
+  docker compose pull   # pull the latest images from Docker Hub
+  docker compose up -d --force-recreate # build and start the containers again. --force-recreate means force the recreation of the containers. 
+  # Or `docker compose up -d --force-recreate bird_interact_eval` to only recreate the bird_interact_eval container about evalution code environment.
+  ```
    
    This runs 3 containers using prebuilt images from Docker Hub:
    - `bird_interact_postgresql`: PostgreSQL database for bird-interact-lite
@@ -312,8 +332,8 @@ BIRD Team & Google Cloud
 
 
 
+## Change Log
 
-
-
-
-
+- [2025-11-06] 🐛 **Bug Fix** & 🐳 **Docker update**: Update the sqlglot version to 26.16.4 to fix the bug that the sql parser cannot parse the SQL correctly for user simulator. You could fix this by re-install it by `pip install sqlglot==26.16.4` in the `bird_interact_eval` env. The `bird_interact_eval` image is also updated, so you could also pull it and recreate the `bird_interact_eval` container.
+- [2025-10-21] 🐳 **Docker update**: Add the docker for Full DB Env. And we pushed 3 docker images (Base/Full DB Env and the evaluation environment for both `a-Interact` and `c-Interact`) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually! Please pull the latest images from Docker Hub and recreates the containers, e.g. using `docker compose down -v && docker compose pull && docker compose up -d --force-recreate`.
+- [2025-08-22]  🐛 **Bug Fix**: Fix the bug that when evaluating phase-2 SQL, the stored phase-1 SQL cannot be executed successfully, leading to a lower success rate of Phase-2. This bug only affects those tasks where phase1 sql does some operations on the database, e.g. CREATE table, etc.
