@@ -104,14 +104,8 @@ docker compose exec bird_interact_eval bash
 cd bird_interact_agent/
 ```
 
-#### Single Sample Mode
-Single sample mode (`src/` and `experiments/`) is useful for debugging and workflow understanding
-```bash
-bash run_experiment.sh
-```
-Output directory: `outputs/single_runs/`
 
-#### Batch Mode (recommend)
+#### Batch Mode (Recommended)
 Batch mode (`batch_run_bird_interact/`) is recommended for production runs
 ```bash
 bash run_batch_experiments.sh
@@ -119,7 +113,14 @@ bash run_batch_experiments.sh
 Output directory: `outputs/batch_runs/`
 Default user patience is set to 6.
 
+#### Single Sample Mode (Outdated)
+Single sample mode (`src/` and `experiments/`) is useful for debugging and workflow understanding
+```bash
+bash run_experiment.sh
+```
+Output directory: `outputs/single_runs/`
 
+> ‼️ Since we have been using batch mode code for running experiments, the code of single sample mode is not well maintained and may be outdated. You could refer to the batch mode code for reference. We will try our best to make the single running code up to date.
 
 ## Quick Start (BIRD-Interact-Full)
 
