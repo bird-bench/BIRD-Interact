@@ -50,15 +50,16 @@ def segment_sql(sql: str, dialect: str = "postgres") -> list[tuple[str, str]]:
     
     except Exception:
         # Fallback: split on semicolons (preserves each statement roughly)
+        import traceback; print(f"SQLGlot error: {traceback.format_exc()}"); 
         parts = [p.strip() for p in sql.split(";")]
         return [("STATEMENT", p + ";" if not p.endswith(";") else p) 
                 for p in parts if p]
 
 
 if __name__ == "__main__":
-    # sql = "SELECT * FROM sp_artists WHERE artist_name = 'John Doe' GROUP BY artist_name"
-    sql = """
-"""
+    sql = "SELECT * FROM sp_artists WHERE artist_name = 'John Doe' GROUP BY artist_name"
+    # sql = """
+# """
     # print(segment_sql(sql))
     sql_segs = ""
     for clause, text in segment_sql(sql):

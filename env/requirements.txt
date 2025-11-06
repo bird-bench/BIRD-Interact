@@ -48,7 +48,7 @@ gymnasium==1.1.1
 docker==7.1.0
 scikit-learn==1.7.0
 tiktoken
-sqlglot==26.25.3
+sqlglot==26.16.4
 sqlglotrs==0.4.0
 google-cloud-aiplatform==1.71.1
 google-auth==2.38.0
