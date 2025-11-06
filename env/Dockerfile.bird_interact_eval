@@ -9,7 +9,11 @@ RUN apt-get update && apt-get install -y postgresql-client
 
 # Copy requirements.txt and install dependencies
 COPY ./requirements.txt /app
-RUN pip install -r /app/requirements.txt
+# Upgrade pip first, then install with retry logic for SSL/network issues
+RUN pip install --upgrade pip && \
+    for i in 1 2 3 4 5; do \
+        pip install -r /app/requirements.txt && break || sleep 5; \
+    done
 
 # Set entrypoint to keep the container running for testing
 CMD ["tail", "-f", "/dev/null"]
