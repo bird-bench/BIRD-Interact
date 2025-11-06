@@ -321,7 +321,7 @@ class UserSimulatorBirdInteractEnv:
         
         Args:
             ambiguous_query: The initial ambiguous user query
-            clarification_json: JSON containing clarification information
+            clarification_json: JSON containing clarification information, e.g. {"user_query_ambiguity": ..., "knowledge_ambiguity": ...}
             reference_sql: The reference SQL for evaluation
             follow_up_query: A follow-up query for phase 2 (if available)
             clear_query: The original clear query (for decoder)
@@ -331,7 +331,7 @@ class UserSimulatorBirdInteractEnv:
         self.info = {}
         
         self.ambiguous_query = ambiguous_query
-        self.clarifications = clarification_json.get("clarifications", [])
+        self.clarifications = clarification_json
         self.reference_sql = reference_sql
         self.follow_up_query = follow_up_query
         self.follow_up_reference_sql = follow_up_reference_sql
@@ -386,8 +386,7 @@ Provide information only when asked for it, without volunteering extra details."
                 
         if self.clarifications:
             system_message += "\n\nHere are the clarifications you can provide if asked about them:"
-            for clarification in self.clarifications:
-                system_message += f"\n- {clarification['ambiguity_term']}: {clarification['sql_snippet']}"
+            system_message += json.dumps(self.clarifications, indent=2)
                 
         # Replace the system message
         for i, msg in enumerate(messages):

@@ -447,10 +447,15 @@ class ExperimentWrapper():
                     
                     # Calculate ambiguity budget based on this record
                     self.budget_tracker.calculate_amb_resolve_budget(record)
-                    
+                    user_query_ambiguity = record.get("user_query_ambiguity", {})
+                    knowledge_ambiguity = record.get("knowledge_ambiguity", [])
+                    clarification_json = {
+                        "user_query_ambiguity": user_query_ambiguity,
+                        "knowledge_ambiguity": knowledge_ambiguity
+                    }
                     self.user_env.reset(
                         ambiguous_query=record["amb_user_query"],
-                        clarification_json=record.get("user_query_ambiguity", {}),
+                        clarification_json=clarification_json,
                         reference_sql=record["sol_sql"],
                         follow_up_query=record.get("follow_up", {}).get("query") if "follow_up" in record else None,
                         clear_query=record.get("query"),  # Add clear query if available
