@@ -239,7 +239,7 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
 
 ### Dataset Description
 
-- **Database:** The complete PostgreSQL database can be download from [the Google Drive](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view). Check the [Quick Eval](#quick-eval) section for more details.
+- **Database:** The complete PostgreSQL database can be download from [bird-interact-lite](https://drive.google.com/file/d/1QIGQlRKbkqApAOrQXPqFJgUg8rQ7HRRZ/view) and [bird-interact-full](https://drive.google.com/file/d/1V9SFIWebi27JtaDUAScG1xE9ELbYcWLR/view).
 - **data:** Each data instance contain the following main parts:
    - `selected_database`: The name of the database.  
    - `query`: The unambiguous user query.  
@@ -262,7 +262,7 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
 ### Dataset Uses
 
 To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases along with data.
-please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` in title for full set, which will be sent automatically.
+please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` or `[bird-interact-full GT&Test Cases]` in the title for ground truth and test cases for the bird-interact-lite or bird-interact-full dataset, which will be sent automatically.
 
 
 <!-- ### Use the Dataset from HuggingFace
