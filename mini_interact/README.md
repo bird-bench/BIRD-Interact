@@ -1,4 +1,8 @@
-## We have currently released a knowledge-based-ambiguity version of mini-interact. For example, some specific knowledge is unclear to the system model.
+### 1. Knowledge-Based Ambiguity Version (Current Release)
+We have released the **knowledge-based ambiguity** version of *mini-interact*.  
+In this version, the system may exhibit uncertainty or ambiguity due to incomplete or unclear knowledge.
 
-## The personalized-ambiguity version of mini-interact is coming soon. It covers the ambiguity from the user's specific preference.
+### 2. Personalized Ambiguity Version (Coming Soon)
+The upcoming **personalized ambiguity** version of *mini-interact* will address ambiguity arising from **individual user preferences**, adapting its responses to better reflect each user’s unique context and style.
+
 
