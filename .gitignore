@@ -1,4 +1,4 @@
 .DS_store
 postgre_table_dumps
 postgre_table_dumps_full
-
+*.pyc

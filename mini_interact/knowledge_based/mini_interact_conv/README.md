@@ -74,9 +74,12 @@ mini_interact_conv/
 
 ### 1. Prerequisites
 
-- Python 3.8+
-- SQLite3
-- Required Python packages (install via pip)
+```bash
+conda create -n bird_interact python=3.10 -y
+conda activate bird_interact
+cd BIRD-Interact/env
+pip install -r requirements.txt
+```
 
 ### 2. Data Preparation
 
