@@ -1,6 +1,6 @@
 # 🎯 Mini-Interact Dataset
 
-> 🚀 A portable and easy-to-eval version containing 300 tasks specifically for SQLite, with ambiguity resolution and follow-up query separately and decoupled. **HuggingFace Dataset Card:** [bird-mini-interact](https://huggingface.co/datasets/birdsql/mini-interact).
+🚀 A portable and easy-to-eval version containing 300 tasks specifically for SQLite, with ambiguity resolution and follow-up query separately and decoupled. **HuggingFace Dataset Card:** [bird-mini-interact](https://huggingface.co/datasets/birdsql/mini-interact).
 
 ## 📋 Current Status
 
@@ -60,6 +60,7 @@ We welcome contributions! Feel free to:
 ## 📧 Contact
 
 Questions? Reach out to us at [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com)
+
 
 
 
