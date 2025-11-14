@@ -87,7 +87,7 @@ Please download the SQLite databases in the `data/` directory and the mini_inter
 
 ### 3. API Configuration
 
-You need to set up the model name and API key in the `code/config.py` file:
+You need to set up the model name and API key in the `mini_interact/knowledge_based/mini_interact_conv/code/config.py` file:
 
 ```python
 # Example configuration
@@ -100,7 +100,7 @@ MODEL_NAME = "gpt-4o-2024-08-06"  # or other supported models
 
 1. **Configure the pipeline script:**
    ```bash
-   cd pipeline
+   cd mini_interact/knowledge_based/mini_interact_conv/pipeline
    # The virtual environment is the same with `mini_interact_agent`.
    # Edit run_Mini_Interact.sh:
    # - Line 12: Set project_root to your project directory (e.g., "/Users/yourname/mini_interact_conv")
@@ -114,7 +114,7 @@ MODEL_NAME = "gpt-4o-2024-08-06"  # or other supported models
    ```
 
 3. **Output:**
-   Results will be saved in `results/patience_{patience}/{model_name}/`
+   Results will be saved in `mini_interact/knowledge_based/mini_interact_conv/results/patience_{patience}/{model_name}/`
 
 ### Key Parameters
 
