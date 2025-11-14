@@ -79,6 +79,7 @@ bird_interact_conv/
 ### 1. Data Preparation
 
 ```bash
+cd /YOUR-PTOJECT-ROOT/BIRD-Interact/bird_interact_conv
 mkdir data
 cd data
 git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
@@ -91,9 +92,9 @@ Please refer to [README.md](../README.md#environment-setup) for the environment 
 
 Start the evaluation environment:
 ```bash
-cd env/
+cd /YOUR-PTOJECT-ROOT/BIRD-Interact/env/
 docker compose exec bird_interact_eval bash
-cd bird_interact_conv/
+cd ../bird_interact_conv/
 ```
 
 ### 3. API Configuration
