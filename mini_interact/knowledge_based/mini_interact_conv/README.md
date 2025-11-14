@@ -83,7 +83,7 @@ pip install -r requirements.txt
 
 ### 2. Data Preparation
 
-Please download the SQLite databases in the `data/` directory and the mini_interact data in `data/mini_interact.jsonl`. Please download here.
+Please download the SQLite databases in the `data/` directory and the mini_interact data in `data/mini_interact.jsonl`. Please download [HERE](https://huggingface.co/datasets/birdsql/mini-interact).
 
 ### 3. API Configuration
 
