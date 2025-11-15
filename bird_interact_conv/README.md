@@ -79,6 +79,7 @@ bird_interact_conv/
 ### 1. Data Preparation
 
 ```bash
+cd /YOUR-PTOJECT-ROOT/BIRD-Interact/bird_interact_conv
 mkdir data
 cd data
 git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
@@ -91,9 +92,9 @@ Please refer to [README.md](../README.md#environment-setup) for the environment 
 
 Start the evaluation environment:
 ```bash
-cd env/
+cd /YOUR-PTOJECT-ROOT/BIRD-Interact/env/
 docker compose exec bird_interact_eval bash
-cd bird_interact_conv/
+cd ../bird_interact_conv/
 ```
 
 ### 3. API Configuration
@@ -102,6 +103,8 @@ You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key i
 
 
 ## Running Experiments (BIRD-Interact-Lite)
+**If you want to eval on bird-interact-full:**
+   - Change the host in `BIRD_Interact/evaluation/src/postgresql_utils.py` (`DEFAULT_DB_CONFIG`) from `bird_interact_postgresql` to `bird_interact_postgresql_full`. 
 
    ```bash
    # Run the conversation pipeline, need to set the API key in code/config.py

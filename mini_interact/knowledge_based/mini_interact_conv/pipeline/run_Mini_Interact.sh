@@ -8,8 +8,8 @@ set -e
 # Parameters:
 patience=3
 US_model_name="claude-4-5-haiku"
-system_model_name="qwen3-coder"
-project_root="/app"
+system_model_name="gpt-4.1-mini"
+project_root="YOUR-PROJECT-ROOT"
 # ===========================================: Phase 1 (Ambiguity Resolution) :===========================================
 # Phase 1: Ambiguity Resolution
 ## Turn 1
@@ -188,6 +188,7 @@ python ${project_root}/mini_interact_conv/code/wrap_up_sql_sqlite.py --data_path
 wait
 
 ## Eval
+cd ${project_root}/mini_interact_conv/evaluation
 jsonl_file="${project_root}/mini_interact_conv/results/patience_${patience}/${system_model_name}/sql_results.jsonl"
 db_path="${project_root}/mini_interact_conv/data"
 python ${project_root}/mini_interact_conv/evaluation/wrapper_evaluation_sqlite.py --jsonl_file ${jsonl_file} --db_path ${db_path} --mode "pred"

@@ -65,8 +65,8 @@ mini_interact_conv/
 │   ├── wrapper_evaluation_sqlite.py    # Evaluation wrapper
 │   └── run_eval.sh                  # Evaluation script (optional)
 ├── data/
-│   ├── bird_interact_sqlite/        # SQLite databases
-│   └── bird_interact_sqlite/mini_interact.jsonl     # Mini-Interact dataset
+│   ├── DBs ...      # SQLite databases
+│   └── mini_interact.jsonl     # Mini-Interact dataset
 └── results/                         # Output directory for results
 ```
 
@@ -83,11 +83,11 @@ pip install -r requirements.txt
 
 ### 2. Data Preparation
 
-The project includes SQLite databases in the `data/bird_interact_sqlite/` directory and test data in `data/mini_interact_test.jsonl`.
+Please download the SQLite databases in the `data/` directory and the mini_interact data in `data/mini_interact.jsonl`. Please download [HERE](https://huggingface.co/datasets/birdsql/mini-interact).
 
 ### 3. API Configuration
 
-You need to set up the model name and API key in the `code/config.py` file:
+You need to set up the model name and API key in the `mini_interact/knowledge_based/mini_interact_conv/code/config.py` file:
 
 ```python
 # Example configuration
@@ -100,8 +100,8 @@ MODEL_NAME = "gpt-4o-2024-08-06"  # or other supported models
 
 1. **Configure the pipeline script:**
    ```bash
-   cd pipeline
-   # The virtual environment is the same with `mini_interact_agent`. Details can be found in the REAMDE of the overall `mini_interact` folder.
+   cd mini_interact/knowledge_based/mini_interact_conv/pipeline
+   # The virtual environment is the same with `mini_interact_agent`.
    # Edit run_Mini_Interact.sh:
    # - Line 12: Set project_root to your project directory (e.g., "/Users/yourname/mini_interact_conv")
    # - Line 9: Adjust patience parameter (default: 3)
@@ -114,7 +114,7 @@ MODEL_NAME = "gpt-4o-2024-08-06"  # or other supported models
    ```
 
 3. **Output:**
-   Results will be saved in `results/patience_{patience}/{model_name}/`
+   Results will be saved in `mini_interact/knowledge_based/mini_interact_conv/results/patience_{patience}/{model_name}/`
 
 ### Key Parameters
 

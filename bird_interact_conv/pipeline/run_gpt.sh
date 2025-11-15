@@ -10,6 +10,7 @@ patience=3
 US_model_name="gpt-4.1-mini"
 system_model_name="gpt-4.1-mini"
 project_root="YOUR-ROOT"
+dataset_name="bird-interact-lite"
 # ===========================================: Phase 1 (Ambiguity Resolution) :===========================================
 # Phase 1: Ambiguity Resolution
 ## Turn 1
@@ -18,15 +19,15 @@ turn_num=1
 result_dir="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/"
 mkdir -p "$result_dir"
 result_path_prompt="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction_prompt.jsonl"
-DB_schema_path="${project_root}/bird_interact_conv/data/bird-interact-lite/[[DB_name]]/[[DB_name]]_schema.txt"
-external_kg_path="${project_root}/bird_interact_conv/data/bird-interact-lite/[[DB_name]]/[[DB_name]]_kb.jsonl"
+DB_schema_path="${project_root}/bird_interact_conv/data/${dataset_name}/[[DB_name]]/[[DB_name]]_schema.txt"
+external_kg_path="${project_root}/bird_interact_conv/data/${dataset_name}/[[DB_name]]/[[DB_name]]_kb.jsonl"
 FILE_PATH="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction.jsonl"
 if [ -f "$FILE_PATH" ]; then
     data_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction.jsonl"
 else
-    data_path="${project_root}/bird_interact_conv/data/bird-interact-lite/bird_interact_data.jsonl"
+    data_path="${project_root}/bird_interact_conv/data/${dataset_name}/bird_interact_data.jsonl"
 fi
-user_resp_path="${project_root}/bird_interact_conv/data/bird-interact-lite/bird_interact_data.jsonl"
+user_resp_path="${project_root}/bird_interact_conv/data/${dataset_name}/bird_interact_data.jsonl"
 ### System: Prompt Generation + Infer API + Response Collection
 python ${project_root}/bird_interact_conv/code/infer_api_system.py --prompt_path ${data_path} --result_path ${result_path_prompt} --user_resp_path ${user_resp_path} --DB_schema_path ${DB_schema_path} --external_kg_path ${external_kg_path} --patience ${patience} --turn_num ${turn_num}
 wait 
@@ -48,7 +49,7 @@ FILE_PATH="${project_root}/bird_interact_conv/results/patience_${patience}/${sys
 if [ -f "$FILE_PATH" ]; then
     user_1_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_1_interaction.jsonl"
 else
-    user_1_path="${project_root}/bird_interact_conv/data/bird-interact-lite/bird_interact_data.jsonl"
+    user_1_path="${project_root}/bird_interact_conv/data/${dataset_name}/bird_interact_data.jsonl"
 fi
 result_path_prompt="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_1_interaction_prompt.jsonl"
 sys_resp_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction.jsonl"
@@ -70,7 +71,7 @@ FILE_PATH="${project_root}/bird_interact_conv/results/patience_${patience}/${sys
 if [ -f "$FILE_PATH" ]; then
     user_2_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_2_interaction.jsonl"
 else
-    user_2_path="${project_root}/bird_interact_conv/data/bird-interact-lite/bird_interact_data.jsonl"
+    user_2_path="${project_root}/bird_interact_conv/data/${dataset_name}/bird_interact_data.jsonl"
 fi
 result_path_prompt="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_2_interaction_prompt.jsonl"
 user_1_resp_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_1_interaction.jsonl"
@@ -103,8 +104,8 @@ max_turn=$(awk '
 for ((i=2; i<max_turn; i++)); do
     turn_num=${i}
     result_path_prompt="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction_prompt.jsonl"
-    DB_schema_path="${project_root}/bird_interact_conv/data/bird-interact-lite/[[DB_name]]/[[DB_name]]_schema.txt"
-    external_kg_path="${project_root}/bird_interact_conv/data/bird-interact-lite/[[DB_name]]/[[DB_name]]_kb.jsonl"
+    DB_schema_path="${project_root}/bird_interact_conv/data/${dataset_name}/[[DB_name]]/[[DB_name]]_schema.txt"
+    external_kg_path="${project_root}/bird_interact_conv/data/${dataset_name}/[[DB_name]]/[[DB_name]]_kb.jsonl"
     data_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction.jsonl"
     user_resp_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_2_interaction.jsonl"
     user_1_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_1_interaction.jsonl"
@@ -161,8 +162,8 @@ done
 ## Final Turn: Gen SQL
 turn_num=${max_turn}
 result_path_prompt="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction_prompt.jsonl"
-DB_schema_path="${project_root}/bird_interact_conv/data/bird-interact-lite/[[DB_name]]/[[DB_name]]_schema.txt"
-external_kg_path="${project_root}/bird_interact_conv/data/bird-interact-lite/[[DB_name]]/[[DB_name]]_kb.jsonl"
+DB_schema_path="${project_root}/bird_interact_conv/data/${dataset_name}/[[DB_name]]/[[DB_name]]_schema.txt"
+external_kg_path="${project_root}/bird_interact_conv/data/${dataset_name}/[[DB_name]]/[[DB_name]]_kb.jsonl"
 data_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/system_interaction.jsonl"
 user_resp_path="${project_root}/bird_interact_conv/results/patience_${patience}/${system_model_name}/user_2_interaction.jsonl"
 
