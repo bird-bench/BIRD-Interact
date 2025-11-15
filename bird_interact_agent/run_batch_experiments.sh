@@ -11,6 +11,7 @@ NUM_THREADS=8 # Number of parallel API calls
 # Define models as an array
 
 AGENT_MODEL_NAMES=("gemini-2.0-flash-001")
+DB_HOST="bird_interact_postgresql"  # use ``bird_interact_postgresql_full`` for full dataset
 DB_PORT=5432
 # ## Resume from a previous run
 # RESUME=true
@@ -20,6 +21,7 @@ declare -a PATIENCE_BUDGETS=(6)  # Match the budgets from reference script
 # --- User Simulator Model ---
 USER_MODEL_NAME="gemini-2.0-flash-001"
 USER_SIM_MODE="encoder_decoder" # "vanilla" or "encoder_decoder"
+USER_SIM_PROMPT_VERSION="v2" # "v1" or "v2"  "v2" is recommended since it is more robust.
 
 # --- Budget & Turn Limits ---
 MAX_TURNS=60  # Match the max turns from reference script
@@ -43,6 +45,7 @@ while (( "$#" )); do
     --agent_models=*) AGENT_MODELS="${1#*=}"; shift ;;
     --user_model=*) USER_MODEL_NAME="${1#*=}"; shift ;;
     --user_sim_mode=*) USER_SIM_MODE="${1#*=}"; shift ;;
+    --user_sim_prompt_version=*) USER_SIM_PROMPT_VERSION="${1#*=}"; shift ;;
     --budgets=*) PATIENCE_BUDGETS="${1#*=}"; shift ;;
     --max_turns=*) MAX_TURNS="${1#*=}"; shift ;;
     --base_output_dir=*) BASE_OUTPUT_DIR="${1#*=}"; shift ;;
@@ -50,6 +53,7 @@ while (( "$#" )); do
     --limit=*) LIMIT="${1#*=}"; shift ;;
     --start_index=*) START_INDEX="${1#*=}"; shift ;;
     --db_port=*) DB_PORT="${1#*=}"; shift ;;
+    --db_host=*) DB_HOST="${1#*=}"; shift ;;
     --agent_output_path=*) AGENT_OUTPUT_PATH="${1#*=}"; shift ;;
     --user_output_path=*) USER_OUTPUT_PATH="${1#*=}"; shift ;;
     --resume) RESUME=true; shift ;;
@@ -62,6 +66,7 @@ while (( "$#" )); do
       echo "  --agent_models=M1,M2     Comma-separated agent model names (default: ${AGENT_MODEL_NAMES[*]})"
       echo "  --user_model=MODEL       User simulator model name (default: $USER_MODEL_NAME)"
       echo "  --user_sim_mode=MODE     'vanilla' or 'encoder_decoder' (default: $USER_SIM_MODE)"
+      echo "  --user_sim_prompt_version=VERSION   User simulator prompt version. v1: preliminary prompt used in our early experiments (used in our bird-interact-lite experiments results). v2 (recommended): more robust prompt for the experiment (used in our bird-interact-full experiments results). You cal also use v2 for bird-interact-lite experiments. (default: $USER_SIM_PROMPT_VERSION)"
       echo "  --budgets=B1,B2          Comma-separated patience budgets (default: ${PATIENCE_BUDGETS[*]})"
       echo "  --max_turns=N            Maximum interaction turns per sample (default: $MAX_TURNS)"
       echo "  --base_output_dir=DIR    Base directory for output logs (default: $BASE_OUTPUT_DIR)"
@@ -69,6 +74,7 @@ while (( "$#" )); do
       echo "  --limit=N                Max samples to process (-1 for all) (default: $LIMIT)"
       echo "  --start_index=N          Start processing from this sample index (default: $START_INDEX)"
       echo "  --db_port=PORT           Database port (default: $DB_PORT)"
+      echo "  --db_host=HOST           Database host (default: $DB_HOST)"
       echo "  --agent_output_path=PATH Optional: Base path for agent API call raw outputs"
       echo "  --user_output_path=PATH  Optional: Base path for user simulator API call raw outputs"
       echo "  --resume                 Resume incomplete runs found in output dirs"
@@ -106,7 +112,7 @@ run_single_config() {
     echo "  Output Directory: $exp_output_dir"
     echo "  Output File:      $output_file"
     echo "  Log File:         $log_file"
-    echo "  Database:         $DB_PORT"
+    echo "  Database:         $DB_HOST:$DB_PORT"
     echo "-----------------------------------------------------"
 
     # Check for resume condition
@@ -145,7 +151,7 @@ run_single_config() {
         CMD+=" --user_output_path "$USER_OUTPUT_PATH""
     fi
     CMD+=" --db_port $DB_PORT"
-
+    CMD+=" --db_host $DB_HOST"
     if [ "$VERBOSE" = true ]; then
         CMD+=" --verbose"
     fi

@@ -13,7 +13,7 @@ sys.path.insert(0, project_root)
 
 # Import necessary prompt templates and parsers
 from experiments.utils.prompts import TemplateReActUserBirdInteract
-from src.envs.user_simulator.prompts import user_simulator_encoder, user_simulator_decoder
+from src.envs.user_simulator.prompts import USER_SIMULATOR_ENCODER, USER_SIMULATOR_DECODER
 from src.envs.user_simulator.sql_parser import segment_sql # Assuming this can be imported
 
 # Constants
@@ -138,9 +138,9 @@ def _get_sql_segments(sql: Union[str, List[str]]) -> str:
     _segment_sql_cache[sql_key] = sql_segments.strip()
     return _segment_sql_cache[sql_key]
 
-def build_user_encoder_prompt(question: str, sample_status: 'SampleStatus', db_schema: str) -> str:
+def build_user_encoder_prompt(question: str, sample_status: 'SampleStatus', db_schema: str, user_sim_prompt_version: str = 'v2') -> str:
     """Builds the prompt for the User Simulator Encoder."""
-    prompt = user_simulator_encoder.replace('[[clarification_Q]]', question)
+    prompt = USER_SIMULATOR_ENCODER[user_sim_prompt_version].replace('[[clarification_Q]]', question)
 
     record = sample_status.original_data
     user_query_ambiguity = record.get('user_query_ambiguity', {})
@@ -165,9 +165,9 @@ def build_user_encoder_prompt(question: str, sample_status: 'SampleStatus', db_s
 
     return prompt
 
-def build_user_decoder_prompt(question: str, encoded_action: str, sample_status: 'SampleStatus', db_schema: str) -> str:
+def build_user_decoder_prompt(question: str, encoded_action: str, sample_status: 'SampleStatus', db_schema: str, user_sim_prompt_version: str = 'v2') -> str:
     """Builds the prompt for the User Simulator Decoder."""
-    prompt = user_simulator_decoder.replace('[[clarification_Q]]', question)
+    prompt = USER_SIMULATOR_DECODER[user_sim_prompt_version].replace('[[clarification_Q]]', question)
     prompt = prompt.replace('[[Action]]', encoded_action)
 
     record = sample_status.original_data

@@ -108,7 +108,7 @@ cd bird_interact_agent/
 #### Batch Mode (Recommended)
 Batch mode (`batch_run_bird_interact/`) is recommended for production runs
 ```bash
-bash run_batch_experiments.sh
+bash run_batch_experiments.sh --user_sim_prompt_version=v1 # v1 or v2. v1 is used in our paper experiments for BIRD-Interact-Lite. v2 is used in our paper experiments for BIRD-Interact-Full. You could also use v2 for BIRD-Interact-Lite experiments. v2 is more robust.
 ```
 Output directory: `outputs/batch_runs/`
 Default user patience is set to 6.
@@ -131,12 +131,8 @@ The process of running experiments on the **Full** set is similar to that for th
    Use the Full dataset instead of the Lite one:
    🔗 [birdsql/bird-interact-full](https://huggingface.co/datasets/birdsql/bird-interact-full)
 
-2. **Change Host to Full DB**: 
-   - Change the host in `bird_interact_agent/src/config/db_config.py` from `bird_interact_postgresql` to `bird_interact_postgresql_full`. 
-   
-3. **User Simulator Prompt**
+2. **Run the experiments:**
 
-   The user simulator prompt used for the **Lite** set experiment is defined in [`prompts.py`](./src/envs/user_simulator/prompts.py).
-   
-   For the **Full** set experiment, use [`prompts_for_bird_interact_full.py`](./src/envs/user_simulator/prompts_for_bird_interact_full.py) instead.
-   Therefore, you could update the import path in the code [prompt_utils.py](batch_run_bird_interact/prompt_utils.py) and [us_env_bird_interact.py](src/envs/user_simulator/us_env_bird_interact.py) to use `prompts_for_bird_interact_full.py` when running Full set experiments. 
+   ```bash
+   bash run_batch_experiments.sh --db_host=bird_interact_postgresql_full --user_sim_prompt_version=v2
+   ```

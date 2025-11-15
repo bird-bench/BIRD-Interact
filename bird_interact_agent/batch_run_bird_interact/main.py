@@ -935,7 +935,8 @@ def main():
     parser.add_argument('--log_level', type=str, choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], 
                        default='WARNING', help='Set the logging level (default: INFO)')
     parser.add_argument('--log_file', type=str, help='Path to log file (default: batch_evaluation.log in current directory)')
-
+    parser.add_argument('--user_sim_prompt_version', type=str, default='v2', choices=['v1', 'v2'], help='User simulator prompt version. v1: preliminary prompt used in our early experiments (used in our bird-interact-lite experiments results). v2 (recommended): more robust prompt for the experiment (used in our bird-interact-full experiments results). You cal also use v2 for bird-interact-lite experiments.')
+    
     args = parser.parse_args()
 
     # Set up logging with the specified configuration
