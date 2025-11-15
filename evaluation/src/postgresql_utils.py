@@ -152,9 +152,9 @@ def reset_and_restore_database(db_name, pg_password, logger=None):
     if logger is None:
         logger = PrintLogger()
 
-    pg_host = "bird_interact_postgresql"
-    pg_port = 5432
-    pg_user = "root"
+    pg_host = DEFAULT_DB_CONFIG["host"]
+    pg_port = DEFAULT_DB_CONFIG["port"]
+    pg_user = DEFAULT_DB_CONFIG["user"]
 
     env_vars = os.environ.copy()
     env_vars["PGPASSWORD"] = pg_password
@@ -246,9 +246,9 @@ def reset_and_restore_database(db_name, pg_password, logger=None):
 def create_ephemeral_db_copies(
     base_db_names, num_copies, pg_password, logger, max_retries=3
 ):
-    pg_host = "bird_interact_postgresql"
-    pg_port = 5432
-    pg_user = "root"
+    pg_host = DEFAULT_DB_CONFIG["host"]
+    pg_port = DEFAULT_DB_CONFIG["port"]
+    pg_user = DEFAULT_DB_CONFIG["user"]
     env_vars = os.environ.copy()
     env_vars["PGPASSWORD"] = pg_password
 
@@ -344,9 +344,9 @@ def drop_ephemeral_dbs(ephemeral_db_pool_dict, pg_password, logger):
     """
     Delete all ephemeral databases created during the script execution.
     """
-    pg_host = "bird_interact_postgresql"
-    pg_port = 5432
-    pg_user = "root"
+    pg_host = DEFAULT_DB_CONFIG["host"]
+    pg_port = DEFAULT_DB_CONFIG["port"]
+    pg_user = DEFAULT_DB_CONFIG["user"]
     env_vars = os.environ.copy()
     env_vars["PGPASSWORD"] = pg_password
 
