@@ -103,6 +103,8 @@ You need to setup the model name (eg., **gpt-4o-2024-08-06**) with the API key i
 
 
 ## Running Experiments (BIRD-Interact-Lite)
+**If you want to test bird-interact-full:**
+   - Change the host in `BIRD_Interact/evaluation/src/postgresql_utils.py` (`DEFAULT_DB_CONFIG`) from `bird_interact_postgresql` to `bird_interact_postgresql_full`. 
 
    ```bash
    # Run the conversation pipeline, need to set the API key in code/config.py
