@@ -71,8 +71,24 @@ mkdir data && cd data
 git clone https://huggingface.co/datasets/birdsql/bird-interact-lite
 # Combine with GT fields (contact us for access) into bird_interact_data.jsonl
 ```
-
 > To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases in `bird_interact_data.jsonl`. please email bird.bench25@gmail.com with the tag [bird-interact-lite GT&Test Cases] in title for full set, which will be sent automatically.
+
+After getting the ground-truth fields by emailing us, use the following script to combine the public data with the ground truth and test cases:
+
+Take the full version as an example:
+(1) Run:
+```bash
+python combine_public_with_gt.py /path/to/bird-interact-full/bird_interact_data.jsonl /path/to/bird_interact_full_gt_kg_testcases_08022.jsonl /path/to/bird_interact_data.jsonl  # bird_interact_full_gt_kg_testcases_08022.jsonl is the data file with ground-truth fields, which is obtained by emailing us.
+```
+This will create a new file at `/path/to/bird_interact_data.jsonl` with the combined data. 
+
+(2) Then replace the original public data with the combined data:
+
+```bash
+cp /path/to/bird_interact_data.jsonl /path/to/bird-interact-full/bird_interact_data.jsonl
+```
+
+Same for the other versions: bird-interact-lite, mini version, etc. Just set correct paths for the public data and the ground truth and test cases, and then replace the original public data with the combined data.
 
 
 ### 2. API Configuration

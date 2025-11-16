@@ -265,6 +265,28 @@ To avoid data leakage by auto-crawling, we do not include GT solution sqls and t
 please email [bird.bench25@gmail.com](mailto:bird.bench25@gmail.com) with the tag `[bird-interact-lite GT&Test Cases]` or `[bird-interact-full GT&Test Cases]` in the title for ground truth and test cases for the bird-interact-lite or bird-interact-full dataset, which will be sent automatically.
 
 
+### Combine the public data with the ground truth and test cases
+
+Then use the following script to combine the public data with the ground truth and test cases:
+
+Take the full version as an example:
+(1) Run:
+```bash
+python combine_public_with_gt.py /path/to/bird-interact-full/bird_interact_data.jsonl /path/to/bird_interact_full_gt_kg_testcases_08022.jsonl /path/to/bird_interact_data.jsonl  # bird_interact_full_gt_kg_testcases_08022.jsonl is the data of ground-truth fields, which is obtained by emailing us.
+```
+This will create a new file at `/path/to/bird_interact_data.jsonl` with the combined data. 
+
+(2) Then replace the original public data with the combined data:
+
+```bash
+cp /path/to/bird_interact_data.jsonl /path/to/bird-interact-full/bird_interact_data.jsonl
+```
+
+Same for the other versions: bird-interact-lite, mini version, etc. Just set correct paths for the public data and the ground truth and test cases, and then replace the public data with the combined data.
+
+
+
+
 <!-- ### Use the Dataset from HuggingFace
 
 You can download the dataset from HuggingFace using the following command:
