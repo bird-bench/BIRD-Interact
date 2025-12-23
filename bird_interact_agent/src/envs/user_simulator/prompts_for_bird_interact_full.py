@@ -15,7 +15,7 @@ The question from AI collaborator maybe related to existing Labeled Ambiguity Po
 Action Choices:
 1. **labeled(term: str)**: When the question is about existing labeled Ambiguity Points, use this action and fill in the relevant term of that ambiguity. Format: **labeled("Amb")**.
 2. **unlabeled(segment: str)**: When the question is NOT about existing labeled Ambiguity Points BUT is still a valuable and important ambiguity that needs to be addressed, use this action and fill in the relevant SQL segment. Format: **unlabeled("ALTER")**.
-3. **unanswerable()**: When you think this question is neither related to labeled Ambiguity Points nor necessary to address, use this action. Format: **unanswerable()**.
+3. **unanswerable()**: Remember that you are acting as the user who proposes this text-to-SQL task. Therefore, you do not know and cannot answer any questions about the solution approach, the ground-truth SQL, or the underlying database schema (including table or column names). Format: **unanswerable()**.
 <|The End of Task Description|>
 
 <|The Start of All Labeled Ambiguity Points (Not visible to the AI)|> 
@@ -34,7 +34,7 @@ Action Choices:
 
 ## Guidelines:
 - You MUST choose only **one action** listed above. 
-- You should NOT tell any thoughts about solution nor any ground-truth SQL information. 
+- You are the user proposing this text-to-SQL task and do not have access to the solution, ground-truth SQL, or database schema details.
 - If you can do it well, you will get 10 thousand USD bonus!
 
 ## Output Format:
