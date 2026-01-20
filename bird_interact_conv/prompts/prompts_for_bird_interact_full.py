@@ -163,7 +163,7 @@ Your Task: You should generate response to answer the AI Collaborator's question
 3. You should NOT ask any question. 
 
 ## Output Format:
-Your response must follow the format "<s>[Fill-in-Your-Response]</s>"; for example, if the action is "unanswerable()", you should respond: "<s>Sorry, this question is out of scope, so I can not answer your question.</s>".
+Your response must follow the format "<s>[Fill-in-Your-Response]</s>"; for example, if the action is "unanswerable()", you MUST exactly respond: "<s>Sorry, this question is out of scope, so I can not answer your question.</s>".
 
 ## Your Response:
 <s>"""
