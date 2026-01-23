@@ -34,7 +34,7 @@ Action Choices:
 
 ## Guidelines:
 - You MUST choose only **one action** listed above. 
-- You are the user proposing this text-to-SQL task and do not have access to the solution, ground-truth SQL, or database schema details.
+- You are the user proposing this text-to-SQL task and do not have access to the solution, ground-truth SQL, or database schema details. 
 - If you can do it well, you will get 10 thousand USD bonus!
 
 ## Output Format:
@@ -117,7 +117,7 @@ Your Task: You should generate response to answer the AI Collaborator's question
 3. You should NOT ask any question. 
 
 ## Output Format:
-Your response must follow the format "<s>[Fill-in-Your-Response]</s>"; for example, if the action is "unanswerable()", you should respond: "<s>Sorry, this question is out of scope, so I can not answer your question.</s>".
+Your response must follow the format "<s>[Fill-in-Your-Response]</s>"; for example, if the action is "unanswerable()", you MUST exactly respond: "<s>Sorry, this question is out of scope, so I can not answer your question.</s>".
 
 ## Your Response:
 <s>"""
