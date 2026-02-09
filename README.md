@@ -64,6 +64,8 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
+- [2026-02-08] 📝 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** has beed accepted at **ICLR 2026 (Oral)**! See you in Rio 🇧🇷!  
+
 - [2025-11-06] 🐛 **Bug Fix** & 🐳 **Docker update**: Update the sqlglot version to 26.16.4 to fix the bug that the sql parser cannot parse the SQL correctly for user simulator. You could fix this by re-install it by `pip install sqlglot==26.16.4` in the `bird_interact_eval` env. The `bird_interact_eval` image is also updated, so you could also pull it and recreate the `bird_interact_eval` container.
 
 - [2025-10-21] 🐳 **Docker update**: We added the docker for Full DB Env. And we pushed 3 docker images (Base/Full DB Env and the evaluation environment for both `a-Interact` and `c-Interact`) to Docker Hub to facilitate the environment setup. No need to download the DB dumps and build the images manually!
