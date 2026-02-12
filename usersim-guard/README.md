@@ -129,14 +129,14 @@ usersim-guard/
 
 ### Data Setup
 
-This project uses data from [BIRD-Interact](https://github.com/bird-bench/BIRD-Interact). Follow these steps:
+This project uses data from [BIRD-Interact](https://huggingface.co/datasets/birdsql/bird-interact-lite). Follow these steps:
 
 1. **Download BIRD-Interact-lite** databases and `bird_interact_data.jsonl`:
    - Follow the setup instructions at [BIRD-Interact GitHub](https://github.com/bird-bench/BIRD-Interact)
    - Use the **lite** version (18 databases, ~207 MB)
 
 2. **Download UserSim_Guard** evaluation dataset:
-   - From HuggingFace: [birdsql/UserSim_Guard](https://huggingface.co/datasets/birdsql/UserSim_Guard)
+   - From HuggingFace: [birdsql/UserSim_Guard](https://huggingface.co/datasets/birdsql/usersim-guard-v1.5)
    - Place the 3 JSONL files in `data/UserSim_Guard/`
 
 ---
