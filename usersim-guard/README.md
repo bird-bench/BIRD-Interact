@@ -164,7 +164,7 @@ export OPENAI_BASE_URL="https://api.openai.com/v1"  # Optional: custom endpoint
 export ANTHROPIC_API_KEY="your-anthropic-key"
 ```
 
-**Using unsupported models?** See [Adding Custom Models](#adding-custom-models) below.
+**Using unsupported models?** See Adding Custom Models below.
 
 ### 3. Run Evaluation
 
