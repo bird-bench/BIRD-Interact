@@ -18,6 +18,15 @@ from src.envs.ic_env import (
     BaseEnv,
     AGENT_OBS, EVAL_OBS, CORRUPT_GOLD, ACTION_EXEC, REWARD
 )
+
+
+def strip_outer_quotes(s: str) -> str:
+    """Remove one matching pair of outer quotes (triple or single) from a string."""
+    if (s.startswith('"""') and s.endswith('"""')) or (s.startswith("'''") and s.endswith("'''")):
+        return s[3:-3]
+    if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+        return s[1:-1]
+    return s
 from src.envs.bird_interact_env.test_case_utils.db_utils import execute_queries, reset_and_restore_database
 from src.envs.bird_interact_env.test_case_utils.test_utils import test_case_default
 from src.config.db_config import get_db_config
@@ -259,7 +268,7 @@ class BirdInteractSqlEnv(BaseEnv):
         # Process the action based on type
         if action.startswith("execute("):
             # Extract SQL command
-            sql = action[8:-1].strip().strip("'\"")
+            sql = strip_outer_quotes(action[8:-1].strip())
             
             # Use execute_queries from test_case_utils_from_another_repo
             result, error, timeout = execute_queries(sql, self.record['selected_database'], self.cnx)
@@ -302,7 +311,7 @@ class BirdInteractSqlEnv(BaseEnv):
             try:
                 # Parse the arguments
                 table_col = action[19:-1].strip()
-                parts = [p.strip().strip("'\"") for p in table_col.split(",")]
+                parts = [strip_outer_quotes(p.strip()) for p in table_col.split(",")]
                 if len(parts) != 2:
                     observation = "Error: get_column_meaning requires two arguments: table_name, column_name"
                     self.info[ACTION_EXEC] = False
@@ -319,7 +328,7 @@ class BirdInteractSqlEnv(BaseEnv):
         elif action.startswith("get_knowledge_definition("):
             try:
                 # Extract knowledge name
-                knowledge_name = action[25:-1].strip().strip("'\"")
+                knowledge_name = strip_outer_quotes(action[25:-1].strip())
                 observation = self.get_knowledge_definition(knowledge_name)
                 self.info[ACTION_EXEC] = True
             except Exception as e:

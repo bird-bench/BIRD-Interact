@@ -7,6 +7,15 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
 import argparse, re
+
+
+def strip_outer_quotes(s: str) -> str:
+    """Remove one matching pair of outer quotes (triple or single) from a string."""
+    if (s.startswith('"""') and s.endswith('"""')) or (s.startswith("'''") and s.endswith("'''")):
+        return s[3:-3]
+    if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+        return s[1:-1]
+    return s
 from src.envs import (
     BirdInteractSqlEnv, ACTION_EXEC
 )
@@ -290,7 +299,7 @@ class ExperimentWrapper():
             # Handle SQL commands
             match = re.search(r'execute\((.*)\)', action_str, re.DOTALL)
             if match:
-                sql = match.group(1).strip().strip("'\"")
+                sql = strip_outer_quotes(match.group(1).strip())
                 return f"execute({sql})", True
             return "", False
         elif action_str.startswith("get_schema("):

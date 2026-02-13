@@ -13,6 +13,17 @@ import logging
 logger = logging.getLogger(__name__)
 
 MAX_RESULT_LENGTH = 500
+
+
+def strip_outer_quotes(s: str) -> str:
+    """Remove one matching pair of outer quotes (triple or single) from a string."""
+    if (s.startswith('"""') and s.endswith('"""')) or (s.startswith("'''") and s.endswith("'''")):
+        return s[3:-3]
+    if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+        return s[1:-1]
+    return s
+
+
 KNOWLEDGE_VISIBLE_FIELDS = ["id", "knowledge", "description", "definition"]
 
 # --- Database Connection Cache --- (Simple example, might need more robust handling)
@@ -134,7 +145,7 @@ def execute_env_action(action: str, sample_status: 'SampleStatus', data_path_bas
             # (Requires knowing the current phase and preprocess SQL for that phase)
             # Simplified: Assuming preprocess is done once at the start
 
-            sql = action[8:-1].strip().strip("'\"")
+            sql = strip_outer_quotes(action[8:-1].strip())
             result, error, timeout = execute_queries(sql, db_name, conn)
             if error:
                 observation = f"SQL execution error: {error}"
@@ -215,7 +226,7 @@ def execute_env_action(action: str, sample_status: 'SampleStatus', data_path_bas
                 params_str = match.group(1).strip()
                 try:
                     # Attempt to parse assuming comma-separated strings
-                    parts = [p.strip().strip("'\"") for p in params_str.split(",")]
+                    parts = [strip_outer_quotes(p.strip()) for p in params_str.split(",")]
                     if len(parts) == 2:
                         table_name, column_name = parts
                         key = f"{db_name}|{table_name.lower()}|{column_name.lower()}"
@@ -237,7 +248,7 @@ def execute_env_action(action: str, sample_status: 'SampleStatus', data_path_bas
         elif action.startswith("get_knowledge_definition("):
              match = re.search(r"get_knowledge_definition\((.*)\)", action)
              if match:
-                knowledge_name = match.group(1).strip().strip("'\"")
+                knowledge_name = strip_outer_quotes(match.group(1).strip())
                 agent_kb = _filter_knowledge_for_agent(db_name, sample_status.original_data)
                 if knowledge_name in agent_kb:
                     knowledge = agent_kb[knowledge_name]
@@ -461,7 +472,7 @@ def execute_submit_action(sql: str, sample_status: 'SampleStatus', data_path_bas
         if passed:
             logger.info(f"Sample {sample_status.idx}, Phase {current_phase}: Submission PASSED. Message: {message}")
             phase_reward = phase_rewards.get(current_phase, 0)
-            reward += phase_reward
+            reward = phase_reward + (sample_status.last_reward or 0)
             if current_phase == 1:
                 phase1_completed = True
                 # ensure saved sql is stored as a stsring
