@@ -20,6 +20,9 @@ from src.envs.ic_env import (
 )
 
 
+import ast
+
+
 def strip_outer_quotes(s: str) -> str:
     """Remove one matching pair of outer quotes (triple or single) from a string."""
     if (s.startswith('"""') and s.endswith('"""')) or (s.startswith("'''") and s.endswith("'''")):
@@ -27,6 +30,26 @@ def strip_outer_quotes(s: str) -> str:
     if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
         return s[1:-1]
     return s
+
+
+def parse_action_arg(action: str, prefix: str) -> str:
+    """
+    Extract the string argument from action text like 'execute("...")'.
+    """
+    match = re.search(rf'{re.escape(prefix)}\((.*)\)', action, re.DOTALL)
+    if match:
+        raw = match.group(1).strip()
+    else:
+        raw = action[len(prefix)+1:-1].strip()
+    try:
+        result = ast.literal_eval(raw)
+        if isinstance(result, str):
+            return result
+    except Exception:
+        pass
+    return strip_outer_quotes(raw)
+
+
 from src.envs.bird_interact_env.test_case_utils.db_utils import execute_queries, reset_and_restore_database
 from src.envs.bird_interact_env.test_case_utils.test_utils import test_case_default
 from src.config.db_config import get_db_config
@@ -268,7 +291,7 @@ class BirdInteractSqlEnv(BaseEnv):
         # Process the action based on type
         if action.startswith("execute("):
             # Extract SQL command
-            sql = strip_outer_quotes(action[8:-1].strip())
+            sql = parse_action_arg(action, "execute")
             
             # Use execute_queries from test_case_utils_from_another_repo
             result, error, timeout = execute_queries(sql, self.record['selected_database'], self.cnx)
@@ -310,8 +333,16 @@ class BirdInteractSqlEnv(BaseEnv):
         elif action.startswith("get_column_meaning("):
             try:
                 # Parse the arguments
-                table_col = action[19:-1].strip()
-                parts = [strip_outer_quotes(p.strip()) for p in table_col.split(",")]
+                match = re.search(r"get_column_meaning\((.*)\)", action, re.DOTALL)
+                params_str = match.group(1).strip() if match else action[19:-1].strip()
+                try:
+                    parsed = ast.literal_eval(params_str)
+                    if isinstance(parsed, tuple):
+                        parts = list(parsed)
+                    else:
+                        parts = [str(parsed)]
+                except Exception:
+                    parts = [strip_outer_quotes(p.strip()) for p in params_str.split(",")]
                 if len(parts) != 2:
                     observation = "Error: get_column_meaning requires two arguments: table_name, column_name"
                     self.info[ACTION_EXEC] = False
@@ -328,7 +359,7 @@ class BirdInteractSqlEnv(BaseEnv):
         elif action.startswith("get_knowledge_definition("):
             try:
                 # Extract knowledge name
-                knowledge_name = strip_outer_quotes(action[25:-1].strip())
+                knowledge_name = parse_action_arg(action, "get_knowledge_definition")
                 observation = self.get_knowledge_definition(knowledge_name)
                 self.info[ACTION_EXEC] = True
             except Exception as e:

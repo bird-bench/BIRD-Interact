@@ -6,7 +6,7 @@ import jsonlines  # Add this import
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
-import argparse, re
+import argparse, re, ast
 
 
 def strip_outer_quotes(s: str) -> str:
@@ -16,6 +16,24 @@ def strip_outer_quotes(s: str) -> str:
     if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
         return s[1:-1]
     return s
+
+
+def parse_action_arg(action: str, prefix: str) -> str:
+    """
+    Extract the string argument from action text like 'execute("...")'.
+    """
+    match = re.search(rf'{re.escape(prefix)}\((.*)\)', action, re.DOTALL)
+    if match:
+        raw = match.group(1).strip()
+    else:
+        raw = action[len(prefix)+1:-1].strip()
+    try:
+        result = ast.literal_eval(raw)
+        if isinstance(result, str):
+            return result
+    except Exception:
+        pass
+    return strip_outer_quotes(raw)
 from src.envs import (
     BirdInteractSqlEnv, ACTION_EXEC
 )
@@ -297,9 +315,8 @@ class ExperimentWrapper():
         # Extract parameters from the action
         if action_str.startswith("execute("):
             # Handle SQL commands
-            match = re.search(r'execute\((.*)\)', action_str, re.DOTALL)
-            if match:
-                sql = strip_outer_quotes(match.group(1).strip())
+            sql = parse_action_arg(action_str, "execute")
+            if sql:
                 return f"execute({sql})", True
             return "", False
         elif action_str.startswith("get_schema("):

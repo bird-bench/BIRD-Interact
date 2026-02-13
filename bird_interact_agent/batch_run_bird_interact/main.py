@@ -23,7 +23,8 @@ from batch_run_bird_interact.action_handler import (
     _schema_cache,
     load_db_data_if_needed,
     close_db_connection,
-    get_db_connection # Needed for schema loading in user sim prompts
+    get_db_connection, # Needed for schema loading in user sim prompts
+    parse_action_arg,
 )
 from batch_run_bird_interact.prompt_utils import (
     build_initial_agent_prompt,
@@ -571,17 +572,8 @@ def run_batch_evaluation(args):
             elif obj == "User" and action.startswith("ask("):
                 actions_to_process['User_ask'].append(status)
             elif obj == "User" and action.startswith("submit("):
-                 # Extract SQL for submission
-                sql_match = re.search(r'submit\((.*)\)', action, re.DOTALL)
-                if sql_match:
-                    sql_to_submit = sql_match.group(1).strip().strip("'\"")
-                    actions_to_process['User_submit'].append((status, sql_to_submit))
-                else:
-                    logger.warning(f"Sample {status.idx}: Could not parse SQL from submit action: {action}. Treating as error.")
-                    status.last_observation = "Error: Invalid submit action format."
-                    # Log the turn with error
-                    status.add_turn_log(thought, obj, action, status.last_observation, 0.0, budget_info_after_action)
-
+                sql_to_submit = parse_action_arg(action, "submit")
+                actions_to_process['User_submit'].append((status, sql_to_submit))
             else:
                 logger.warning(f"Sample {status.idx}: Unknown action object/type: Object='{obj}', Action='{action}'")
                 status.last_observation = f"Error: Unknown action object or type. The format should be in <thought>...</thought><interaction_object>...</interaction_object><action>...</action>. And the input(s) of action content is/are stricted to STRING ENCLOSED BY SINGLE PAIR OF QUOTES OR \"\"\"YOUR ACTION HERE\"\"\"."
@@ -626,16 +618,9 @@ def run_batch_evaluation(args):
             valid_ask_statuses = []
             questions = {}
             for status in user_ask_statuses:
-                question_match = re.search(r'ask\((.*)\)', status.parsed_action, re.DOTALL)
-                if question_match:
-                    question = question_match.group(1).strip().strip("'\"")
-                    questions[status.idx] = question
-                    valid_ask_statuses.append(status)
-                else:
-                    logger.warning(f"Sample {status.idx}: Could not parse question from ask action: {status.parsed_action}")
-                    status.last_observation = "Error: Invalid ask action format."
-                    budget_info = {"remaining_budget": status.remaining_budget, "total_budget": status.total_budget, "force_submit": status.force_submit}
-                    status.add_turn_log(status.parsed_action_object, status.parsed_action_object, status.parsed_action, status.last_observation, 0.0, budget_info)
+                question = parse_action_arg(status.parsed_action, "ask")
+                questions[status.idx] = question
+                valid_ask_statuses.append(status)
 
             # --- Execute based on mode --- #
             if valid_ask_statuses:

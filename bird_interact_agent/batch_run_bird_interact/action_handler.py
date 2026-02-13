@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 
 MAX_RESULT_LENGTH = 500
 
+import ast
+
 
 def strip_outer_quotes(s: str) -> str:
     """Remove one matching pair of outer quotes (triple or single) from a string."""
@@ -22,6 +24,33 @@ def strip_outer_quotes(s: str) -> str:
     if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
         return s[1:-1]
     return s
+
+
+def parse_action_arg(action: str, prefix: str) -> str:
+    """
+    Extract the string argument from action text like 'execute("...")'.
+
+    Uses regex to find the argument, then ast.literal_eval to parse Python
+    string literals (handles \\", \\', \"\"\", etc.), with strip_outer_quotes
+    as fallback for non-Python syntax.
+    """
+    # Step 1: regex extracts content between outermost parens, handles trailing ; etc.
+    match = re.search(rf'{re.escape(prefix)}\((.*)\)', action, re.DOTALL)
+    if match:
+        raw = match.group(1).strip()
+    else:
+        raw = action[len(prefix)+1:-1].strip()
+
+    # Step 2: try Python string literal parsing
+    try:
+        result = ast.literal_eval(raw)
+        if isinstance(result, str):
+            return result
+    except Exception:
+        pass
+
+    # Step 3: fallback to simple quote stripping
+    return strip_outer_quotes(raw)
 
 
 KNOWLEDGE_VISIBLE_FIELDS = ["id", "knowledge", "description", "definition"]
@@ -145,7 +174,7 @@ def execute_env_action(action: str, sample_status: 'SampleStatus', data_path_bas
             # (Requires knowing the current phase and preprocess SQL for that phase)
             # Simplified: Assuming preprocess is done once at the start
 
-            sql = strip_outer_quotes(action[8:-1].strip())
+            sql = parse_action_arg(action, "execute")
             result, error, timeout = execute_queries(sql, db_name, conn)
             if error:
                 observation = f"SQL execution error: {error}"
@@ -221,12 +250,19 @@ def execute_env_action(action: str, sample_status: 'SampleStatus', data_path_bas
             success = True
 
         elif action.startswith("get_column_meaning("):
-            match = re.search(r"get_column_meaning\((.*)\)", action)
+            match = re.search(r"get_column_meaning\((.*)\)", action, re.DOTALL)
             if match:
                 params_str = match.group(1).strip()
                 try:
-                    # Attempt to parse assuming comma-separated strings
-                    parts = [strip_outer_quotes(p.strip()) for p in params_str.split(",")]
+                    # Try ast.literal_eval to parse as tuple, e.g. ('table', 'col')
+                    try:
+                        parsed = ast.literal_eval(params_str)
+                        if isinstance(parsed, tuple):
+                            parts = list(parsed)
+                        else:
+                            parts = [str(parsed)]
+                    except Exception:
+                        parts = [strip_outer_quotes(p.strip()) for p in params_str.split(",")]
                     if len(parts) == 2:
                         table_name, column_name = parts
                         key = f"{db_name}|{table_name.lower()}|{column_name.lower()}"
@@ -248,7 +284,7 @@ def execute_env_action(action: str, sample_status: 'SampleStatus', data_path_bas
         elif action.startswith("get_knowledge_definition("):
              match = re.search(r"get_knowledge_definition\((.*)\)", action)
              if match:
-                knowledge_name = strip_outer_quotes(match.group(1).strip())
+                knowledge_name = parse_action_arg(action, "get_knowledge_definition")
                 agent_kb = _filter_knowledge_for_agent(db_name, sample_status.original_data)
                 if knowledge_name in agent_kb:
                     knowledge = agent_kb[knowledge_name]

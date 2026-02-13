@@ -7,8 +7,37 @@ from src.envs.bird_interact_env.token_counter import token_counter
 from src.llm_utils.llm_provider import LLMProvider
 import json
 import os
+import re
+import ast
 
 USER_RESPONSE_CHARACTER_LIMIT = 400
+
+
+def strip_outer_quotes(s: str) -> str:
+    """Remove one matching pair of outer quotes (triple or single) from a string."""
+    if (s.startswith('"""') and s.endswith('"""')) or (s.startswith("'''") and s.endswith("'''")):
+        return s[3:-3]
+    if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+        return s[1:-1]
+    return s
+
+
+def parse_action_arg(action: str, prefix: str) -> str:
+    """
+    Extract the string argument from action text like 'execute("...")'.
+    """
+    match = re.search(rf'{re.escape(prefix)}\((.*)\)', action, re.DOTALL)
+    if match:
+        raw = match.group(1).strip()
+    else:
+        raw = action[len(prefix)+1:-1].strip()
+    try:
+        result = ast.literal_eval(raw)
+        if isinstance(result, str):
+            return result
+    except Exception:
+        pass
+    return strip_outer_quotes(raw)
 
 # Set up logger
 from rich.logging import RichHandler
@@ -443,7 +472,7 @@ Provide information only when asked for it, without volunteering extra details."
         
         # Parse action
         if action.startswith("ask("):
-            question = action[4:-1].strip().strip("'\"")
+            question = parse_action_arg(action, "ask")
             self.dialogue_history.append({"role": "assistant", "content": question})
             
             if self.use_encoder_decoder:
@@ -465,7 +494,7 @@ Provide information only when asked for it, without volunteering extra details."
             return response, 0, self.done
             
         elif action.startswith("submit("):
-            sql = action[7:-1].strip().strip("'\"")
+            sql = parse_action_arg(action, "submit")
             self.dialogue_history.append({"role": "assistant", "content": f"Here's my SQL query: {sql}"})
             
             # Test the SQL
