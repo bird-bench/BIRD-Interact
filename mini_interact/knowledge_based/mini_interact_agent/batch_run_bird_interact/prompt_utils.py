@@ -206,32 +206,18 @@ def build_user_decoder_prompt(question: str, encoded_action: str, sample_status:
 
     return prompt
 
-def parse_encoder_response(response: str) -> str:
-    """Extracts the action label (e.g., labeled(...)) from the encoder response."""
-    # Look for <s>...</s> tags first
-    s_match = re.search(r'(?:<s>)?(.*?)</s>', response, re.DOTALL)
-    if s_match:
-        action_part = s_match.group(1).strip()
-        # Further clean if needed, e.g., remove justifications outside the action
-        action_match = re.match(r'(labeled\(.*?\)|unlabeled\(\)|unanswerable\()\)?', action_part, re.IGNORECASE)
-        if action_match:
-            return action_match.group(1) # Return the core action
-        else:
-            # Fallback if structure inside <s> is weird
-             return action_part if action_part else "unanswerable()"
-        
-    # Fallback if no <s> tags
-    # Look for lines starting with the expected actions
-    lines = response.strip().split('\n')
-    for line in lines:
-        line_clean = line.strip()
-        action_match = re.match(r'(labeled\(.*?\)|unlabeled\(\)|unanswerable\()\)?', line_clean, re.IGNORECASE)
-        if action_match:
-            return action_match.group(1)
+def parse_encoder_response(response):
+    cut_idx = response.find("</s>")
+    if cut_idx != -1:
+        extracted_response = response[:cut_idx].strip()
+    else:
+        extracted_response = response
 
-    # Final fallback
-    logger.warning(f"Could not parse encoder action from response: {response[:100]}... Defaulting to unanswerable()")
-    return "unanswerable()" 
+    if "<s>" in extracted_response:
+        cut_idx_1 = extracted_response.find("<s>")
+        extracted_response = extracted_response[cut_idx_1:].replace("<s>", "").strip()
+
+    return extracted_response
 
 
 if __name__ == "__main__":
