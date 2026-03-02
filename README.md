@@ -260,7 +260,7 @@ Interaction-Time Scaling (ITS) refers to a model's ability to continuously incre
 - **Curated by:** BIRD Team & Google Cloud
 - **License:** [cc-by-sa-4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 - **HuggingFace Dataset Card:** [bird-interact-lite](https://huggingface.co/datasets/birdsql/bird-interact-lite)
-  and [bird-interact-full](https://huggingface.co/datasets/birdsql/bird-interact-full)
+  and [bird-interact-full](https://huggingface.co/datasets/birdsql/bird-interact-full) for PostgreSQL; and [mini-interact](https://huggingface.co/datasets/birdsql/mini-interact) for SQLite.
 ### Dataset Uses
 
 To avoid data leakage by auto-crawling, we do not include GT solution sqls and test cases along with data.
