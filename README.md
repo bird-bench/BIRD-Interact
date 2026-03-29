@@ -64,6 +64,8 @@ Please note that before your evaluation process, when Docker loads the databases
 
 ## 📰 News
 
+- [2026-03-29] 🔥🔥🔥 **BIRD-Interact-ADK**: We release **[BIRD-Interact-ADK](./BIRD-Interact-ADK/)**, a Google ADK-based implementation with modular 3-microservices (agent, user simulator, and DB Env) architecture. Easily swap in your own agent, user simulator, or DB environment. Supports parallel execution and any [LiteLlm-compatible](https://docs.litellm.ai/docs/providers) LLM provider. Recommend to use this implementation for your research.
+
 - [2026-02-08] 🔥🔥🔥 Our **[Bird-Interact paper](https://huggingface.co/papers/2510.05318)** has beed accepted at **ICLR 2026 (Oral)**! See you in Rio 🇧🇷!  
 
 - [2025-11-06] 🐛 **Bug Fix** & 🐳 **Docker update**: Update the sqlglot version to 26.16.4 to fix the bug that the sql parser cannot parse the SQL correctly for user simulator. You could fix this by re-install it by `pip install sqlglot==26.16.4` in the `bird_interact_eval` env. The `bird_interact_eval` image is also updated, so you could also pull it and recreate the `bird_interact_eval` container.
@@ -317,6 +319,9 @@ python pull_data.py \
 .
 ├── LICENSE
 ├── README.md
+├── BIRD-Interact-ADK
+│   ├── ...
+│   └── README.md
 ├── bird_interact_conv
 │   ├── ...
 │   └── README.md
@@ -333,7 +338,7 @@ python pull_data.py \
 │   ├── ...
 └── requirements.txt
 ```
-The details about running **a-interact** can be found in `./bird_interact_agent/README.md`; and **c-interact** can be found in `./bird_interact_conv/README.md`.
+The details about running **a-interact** can be found in `./bird_interact_agent/README.md`; **c-interact** can be found in `./bird_interact_conv/README.md`; and the **ADK-based implementation** can be found in `./BIRD-Interact-ADK/README.md`.
 
 ## 📋 Todo Lists
 
@@ -341,6 +346,7 @@ The details about running **a-interact** can be found in `./bird_interact_agent/
 - [x] Release conversational version, bird-interact-conv.
 - [x] Release agent version, bird-interact-agent.
 - [x] Release Full bird-interact-full (600).
+- [x] Release ADK-based implementation, BIRD-Interact-ADK.
 - [ ] SFT / RL an User Simulator
 
 ## Acknowledgement
