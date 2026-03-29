@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  # Lite dataset (18 DBs, 300 tasks) — default
+  postgresql:
+    image: docker.io/shawnxxh/bird-interact-postgresql:latest
+    container_name: bird_interact_postgresql
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123123
+      TZ: "Asia/Hong_Kong"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    command:
+      - "-c"
+      - "max_connections=300"
+      - "-c"
+      - "shared_buffers=256MB"
+    ports:
+      - "5432:5432"
+
+  # Full dataset (26 DBs, 600 tasks) — use with DATASET=full
+  postgresql_full:
+    image: docker.io/shawnxxh/bird-interact-postgresql-full:latest
+    container_name: bird_interact_postgresql_full
+    profiles: ["full"]
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123123
+      TZ: "Asia/Hong_Kong"
+    volumes:
+      - postgresql_data_full:/var/lib/postgresql/data
+    command:
+      - "-c"
+      - "max_connections=300"
+      - "-c"
+      - "shared_buffers=256MB"
+    ports:
+      - "5433:5432"
+
+volumes:
+  postgresql_data:
+  postgresql_data_full:

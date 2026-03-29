@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.venv/
+.venv-adk/
+.conda-py310/
+.conda-pkgs/
+.pip-cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Results & logs
+results/
+*.log
+batch_evaluation.log
+
+# Data (download from HuggingFace, not committed)
+bird-interact-lite/
+bird-interact-full/
+
+# Local-only provider override
+shared/_local_provider.py
+shared/_legacy_*.py
+
+# Personal / development files
+Bird_ADK_plan.md
+CLAUDE.md
+.claude/
+.agents/
+skills-lock.json
+reference_code_paper/
+
+# OS
+.DS_Store
+Thumbs.db

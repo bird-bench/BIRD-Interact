@@ -1,0 +1,19 @@
+# Core
+google-adk>=1.0.0
+google-genai>=1.0.0
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+httpx>=0.27.0
+pydantic>=2.7.0
+pydantic-settings>=2.2.0
+python-dotenv>=1.0.0
+
+# Database
+psycopg2-binary>=2.9.9
+
+# LLM
+litellm>=1.0.0
+
+# Utilities
+sqlglot>=23.0.0
+rich>=13.7.0

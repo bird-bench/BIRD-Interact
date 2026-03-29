@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 600" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a1" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0.5 L7,2.5 L0,4.5" fill="#6366f1"/></marker>
+    <marker id="a2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0.5 L7,2.5 L0,4.5" fill="#16a34a"/></marker>
+    <marker id="a3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0.5 L7,2.5 L0,4.5" fill="#2563eb"/></marker>
+    <marker id="a4" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M7,0.5 L0,2.5 L7,4.5" fill="#16a34a"/></marker>
+    <marker id="a5" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M7,0.5 L0,2.5 L7,4.5" fill="#2563eb"/></marker>
+    <filter id="sh"><feDropShadow dx="0" dy="1" stdDeviation="2.5" flood-opacity="0.06"/></filter>
+  </defs>
+
+  <rect width="760" height="600" fill="#fafafa" rx="8"/>
+
+  <!-- Title -->
+  <text x="380" y="32" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">BIRD-Interact-ADK Architecture</text>
+
+  <!-- Feature tags -->
+  <rect x="118" y="44" width="108" height="18" rx="9" fill="#f1f0ff" stroke="#c4b5fd" stroke-width="0.7"/>
+  <text x="172" y="56" text-anchor="middle" font-size="8" font-weight="600" fill="#6d28d9">Google ADK Agent</text>
+  <rect x="234" y="44" width="114" height="18" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="0.7"/>
+  <text x="291" y="56" text-anchor="middle" font-size="8" font-weight="600" fill="#2563eb">Modular Services</text>
+  <rect x="356" y="44" width="100" height="18" rx="9" fill="#f0fdf4" stroke="#86efac" stroke-width="0.7"/>
+  <text x="406" y="56" text-anchor="middle" font-size="8" font-weight="600" fill="#16a34a">Async Parallel</text>
+  <rect x="464" y="44" width="82" height="18" rx="9" fill="#fefce8" stroke="#fde68a" stroke-width="0.7"/>
+  <text x="505" y="56" text-anchor="middle" font-size="8" font-weight="600" fill="#a16207">Docker DB</text>
+  <rect x="554" y="44" width="88" height="18" rx="9" fill="#fef2f2" stroke="#fca5a5" stroke-width="0.7"/>
+  <text x="598" y="56" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">LiteLlm</text>
+
+  <!-- ══════ ORCHESTRATOR ══════ -->
+  <rect x="100" y="74" width="560" height="66" rx="8" fill="#1e293b" filter="url(#sh)"/>
+  <text x="120" y="94" font-size="11" font-weight="700" fill="#f1f5f9">Orchestrator</text>
+  <text x="210" y="94" font-size="8.5" fill="#94a3b8" font-family="'SF Mono', Menlo, monospace">runner.py --mode {a|c-interact|oracle} --concurrency N</text>
+
+  <rect x="120" y="104" width="58" height="22" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)"/>
+  <text x="149" y="118" text-anchor="middle" font-size="8.5" fill="#cbd5e1">Task 1</text>
+  <rect x="186" y="104" width="58" height="22" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)"/>
+  <text x="215" y="118" text-anchor="middle" font-size="8.5" fill="#cbd5e1">Task 2</text>
+  <rect x="252" y="104" width="58" height="22" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)"/>
+  <text x="281" y="118" text-anchor="middle" font-size="8.5" fill="#cbd5e1">Task 3</text>
+  <text x="326" y="118" font-size="12" fill="#475569">...</text>
+
+  <text x="400" y="112" font-size="8" fill="#94a3b8" font-style="italic">Bounded concurrency:</text>
+  <text x="400" y="126" font-size="8" fill="#a5b4fc" font-family="'SF Mono', Menlo, monospace">asyncio.gather() + Semaphore(N)</text>
+
+  <!-- Arrow down -->
+  <line x1="380" y1="140" x2="380" y2="170" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+  <text x="392" y="158" font-size="7" fill="#6366f1" font-family="'SF Mono', Menlo, monospace">/init · /run_session</text>
+
+  <!-- ══════ SYSTEM AGENT ══════ -->
+  <rect x="190" y="174" width="380" height="118" rx="8" fill="#f8f7ff" stroke="#c4b5fd" stroke-width="1.2" filter="url(#sh)"/>
+  <rect x="190" y="174" width="380" height="24" rx="8" fill="#7c3aed"/>
+  <rect x="190" y="190" width="380" height="8" fill="#7c3aed"/>
+  <text x="210" y="192" font-size="11" font-weight="700" fill="#fff">System Agent Server</text>
+  <text x="530" y="192" font-size="8" fill="#c4b5fd">:6000</text>
+
+  <text x="206" y="214" font-size="9" font-weight="600" fill="#5b21b6">ADK LlmAgent</text>
+  <text x="300" y="214" font-size="8" fill="#64748b">unified agent, mode-specific tools + callbacks</text>
+
+  <text x="206" y="232" font-size="8" fill="#64748b" font-family="'SF Mono', Menlo, monospace">execute_sql  get_schema  ask_user  submit_sql  +5 tools</text>
+
+  <text x="206" y="250" font-size="8" fill="#5b21b6" font-weight="600">Callbacks</text>
+  <text x="262" y="250" font-size="8" fill="#64748b">budget (a) | phase ctrl (c)</text>
+  <text x="390" y="250" font-size="8" fill="#5b21b6" font-weight="600">LLM</text>
+  <text x="414" y="250" font-size="8" fill="#64748b">LiteLlm (any provider)</text>
+
+  <rect x="206" y="260" width="348" height="14" rx="3" fill="#eef2ff" stroke="#c7d2fe" stroke-width="0.6"/>
+  <text x="380" y="271" text-anchor="middle" font-size="7.5" font-weight="600" fill="#4338ca">to_thread() -- non-blocking HTTP to downstream services</text>
+
+  <!-- ══════ ARROWS TO SERVICES ══════ -->
+
+  <!-- → User Sim -->
+  <path d="M 300 292 Q 240 328 185 358" fill="none" stroke="#16a34a" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#a2)"/>
+  <path d="M 178 352 Q 232 322 292 286" fill="none" stroke="#16a34a" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.35" marker-end="url(#a4)"/>
+  <rect x="186" y="316" width="56" height="16" rx="4" fill="#dcfce7" stroke="#86efac" stroke-width="0.6"/>
+  <text x="214" y="328" text-anchor="middle" font-size="7.5" font-weight="600" fill="#16a34a">/ask</text>
+
+  <!-- → DB Env -->
+  <path d="M 460 292 Q 520 328 575 358" fill="none" stroke="#2563eb" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#a3)"/>
+  <path d="M 582 352 Q 528 322 468 286" fill="none" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.35" marker-end="url(#a5)"/>
+  <rect x="478" y="316" width="98" height="16" rx="4" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.6"/>
+  <text x="527" y="328" text-anchor="middle" font-size="7.5" font-weight="600" fill="#2563eb">/execute /submit</text>
+
+  <!-- ══════ USER SIMULATOR ══════ -->
+  <rect x="30" y="362" width="280" height="94" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" filter="url(#sh)"/>
+  <rect x="30" y="362" width="280" height="24" rx="8" fill="#16a34a"/>
+  <rect x="30" y="378" width="280" height="8" fill="#16a34a"/>
+  <text x="50" y="380" font-size="11" font-weight="700" fill="#fff">User Simulator Server</text>
+  <text x="272" y="380" font-size="8" fill="#86efac">:6001</text>
+
+  <text x="46" y="402" font-size="8.5" fill="#166534" font-weight="600">Action Parser</text>
+  <text x="130" y="402" font-size="8" fill="#64748b">question to action</text>
+  <text x="216" y="402" font-size="8.5" fill="#166534" font-weight="600">Response Generator</text>
+  <text x="46" y="418" font-size="8" fill="#64748b">action + context to natural language response</text>
+
+  <rect x="46" y="428" width="248" height="14" rx="3" fill="#eef2ff" stroke="#c7d2fe" stroke-width="0.6"/>
+  <text x="170" y="439" text-anchor="middle" font-size="7.5" font-weight="600" fill="#4338ca">to_thread() -- concurrent LLM calls</text>
+
+  <!-- ══════ DB ENVIRONMENT ══════ -->
+  <rect x="450" y="362" width="280" height="134" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" filter="url(#sh)"/>
+  <rect x="450" y="362" width="280" height="24" rx="8" fill="#2563eb"/>
+  <rect x="450" y="378" width="280" height="8" fill="#2563eb"/>
+  <text x="470" y="380" font-size="11" font-weight="700" fill="#fff">DB Environment Server</text>
+  <text x="692" y="380" font-size="8" fill="#93c5fd">:6002</text>
+
+  <text x="466" y="402" font-size="8" fill="#1d4ed8" font-weight="600">/execute</text>
+  <text x="518" y="402" font-size="8" fill="#64748b">SELECT-only, no reset, per-task DB</text>
+  <text x="466" y="418" font-size="8" fill="#1d4ed8" font-weight="600">/submit</text>
+  <text x="510" y="418" font-size="8" fill="#64748b">eval + P1 snapshot for Phase 2</text>
+  <text x="466" y="434" font-size="8" fill="#1d4ed8" font-weight="600">/schema /knowledge</text>
+
+  <rect x="466" y="442" width="248" height="14" rx="3" fill="#eef2ff" stroke="#c7d2fe" stroke-width="0.6"/>
+  <text x="590" y="453" text-anchor="middle" font-size="7.5" font-weight="600" fill="#4338ca">to_thread() -- concurrent SQL execution</text>
+
+  <!-- PostgreSQL -->
+  <rect x="466" y="462" width="248" height="26" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="4,2"/>
+  <text x="478" y="479" font-size="8.5" font-weight="600" fill="#334155">PostgreSQL</text>
+  <rect x="546" y="469" width="46" height="14" rx="3" fill="#dbeafe"/><text x="569" y="479" text-anchor="middle" font-size="7" font-weight="600" fill="#2563eb">Docker</text>
+  <text x="600" y="479" font-size="7.5" fill="#94a3b8" font-family="'SF Mono', Menlo, monospace">per-task: {db}__{id}</text>
+
+  <!-- ══════ SCAFFOLDINGS ══════ -->
+  <line x1="30" y1="514" x2="730" y2="514" stroke="#e2e8f0" stroke-width="0.8"/>
+  <text x="30" y="534" font-size="8.5" font-weight="700" fill="#94a3b8" letter-spacing="0.8">AGENT SCAFFOLDINGS</text>
+
+  <rect x="30" y="544" width="340" height="42" rx="6" fill="#fff" stroke="#c4b5fd" stroke-width="1" filter="url(#sh)"/>
+  <text x="46" y="562" font-size="10" font-weight="700" fill="#7c3aed">a-interact</text>
+  <text x="120" y="562" font-size="8.5" fill="#64748b">Agent-driven, budget-based, autonomous tool use</text>
+  <text x="46" y="578" font-size="7.5" fill="#94a3b8" font-family="'SF Mono', Menlo, monospace">budget = 6 + 2*ambiguities + 2*patience</text>
+
+  <rect x="390" y="544" width="340" height="42" rx="6" fill="#fff" stroke="#86efac" stroke-width="1" filter="url(#sh)"/>
+  <text x="406" y="562" font-size="10" font-weight="700" fill="#16a34a">c-interact</text>
+  <text x="476" y="562" font-size="8.5" fill="#64748b">Orchestrator-driven, fixed phases, 1 submit/phase</text>
+  <text x="406" y="578" font-size="7.5" fill="#94a3b8" font-family="'SF Mono', Menlo, monospace">turns = ambiguities + patience</text>
+
+</svg>
