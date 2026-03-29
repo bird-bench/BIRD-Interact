@@ -19,7 +19,7 @@ orchestrator/runner.py          Parallel evaluation runner (--mode, --concurrenc
 ```
 
 <p align="center">
-  <img src="docs/architecture.png" alt="BIRD-Interact-ADK Architecture" width="100%">
+  <img src="docs/architecture.png" alt="BIRD-Interact-ADK Architecture" width="80%">
 </p>
 
 **Key features:**
