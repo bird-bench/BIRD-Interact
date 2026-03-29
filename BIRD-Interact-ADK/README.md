@@ -217,10 +217,6 @@ Fixed workflow driven by the orchestrator:
 1. **Phase 1**: Clarify (ask_user × N) → Submit SQL (once) → Debug if wrong (once)
 2. **Phase 2**: Follow-up question → Submit SQL (once) → Debug if wrong (once)
 
-### Oracle
-
-Submits ground-truth SQL directly — validates the evaluation pipeline without LLM calls. Expected: ~96% P1, ~90% P2|P1.
-
 ## Results
 
 Evaluated on BIRD-Interact-Lite (300 tasks), Claude Sonnet 4.5, patience=3, v1 user simulator prompt (claude-haiku-4-5):
